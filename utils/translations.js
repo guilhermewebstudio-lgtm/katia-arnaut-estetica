@@ -133,6 +133,15 @@ const pt = {
 
   footer_rights: 'Todos os direitos reservados.',
   footer_made_by: 'Website por',
+  footer_tagline: 'Estúdio de estética facial em Benfica, Lisboa — cuidado personalizado, do primeiro diagnóstico ao resultado final.',
+  footer_explore: 'Explorar',
+  footer_account: 'A Sua Conta',
+
+  signature_quote: 'Cada rosto tem a sua própria história — o meu trabalho é ajudá-lo a contá-la com mais confiança.',
+  signature_role: 'Fundadora, Katia Arnaut Estética',
+
+  testimonials_eyebrow: 'Quem Já Passou por Aqui',
+  testimonials_title: 'Palavras de quem confia em nós',
 
   admin_dashboard: 'Painel de Gestão',
   admin_bookings: 'Marcações',
@@ -301,6 +310,15 @@ const en = {
 
   footer_rights: 'All rights reserved.',
   footer_made_by: 'Website by',
+  footer_tagline: 'A facial aesthetics studio in Benfica, Lisbon — personalized care, from the first assessment to the final result.',
+  footer_explore: 'Explore',
+  footer_account: 'Your Account',
+
+  signature_quote: 'Every face has its own story — my work is helping it speak with more confidence.',
+  signature_role: 'Founder, Katia Arnaut Estética',
+
+  testimonials_eyebrow: 'Who Has Been Here',
+  testimonials_title: 'Words from those who trust us',
 
   admin_dashboard: 'Management Panel',
   admin_bookings: 'Bookings',

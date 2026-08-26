@@ -113,6 +113,21 @@
     </div>
   </section>
 
+  <!-- SIGNATURE QUOTE — personal touch -->
+  <section class="signature-section" data-reveal>
+    <div class="container signature-inner">
+      <svg class="signature-mark" width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+        <circle cx="28" cy="28" r="26" stroke="currentColor" stroke-width="1"/>
+        <text x="28" y="37" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="24" fill="currentColor">KA</text>
+      </svg>
+      <p class="signature-quote">"<%= t.signature_quote %>"</p>
+      <div class="signature-attribution">
+        <span class="signature-name">Katia Arnaut</span>
+        <span class="signature-role"><%= t.signature_role %></span>
+      </div>
+    </div>
+  </section>
+
   <!-- TEAM -->
   <section class="section" id="equipa">
     <div class="container">
@@ -186,6 +201,39 @@
     <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Seguinte">›</button>
     <span class="lightbox-caption" id="lightboxCaption"></span>
   </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials-section">
+    <div class="container">
+      <div class="section-head center" data-reveal style="margin-left:auto;margin-right:auto;">
+        <span class="eyebrow"><%= t.testimonials_eyebrow %></span>
+        <h2><%= t.testimonials_title %></h2>
+      </div>
+      <div class="testimonials-grid" data-reveal-group>
+        <% const testimonials = lang === 'en' ? [
+          { name: 'Sofia M.', text: 'The best skincare experience I\'ve had in Lisbon. Personal, attentive, and the results speak for themselves.', treatment: 'Deep Cleansing' },
+          { name: 'Rita C.', text: 'Katia genuinely listens before recommending anything. My skin has never looked this even.', treatment: 'Chemical Peel' },
+          { name: 'Marta A.', text: 'A calm, welcoming space with real technical knowledge behind it. Highly recommend.', treatment: 'Acne Treatment' }
+        ] : [
+          { name: 'Sofia M.', text: 'A melhor experiência de estética que já tive em Lisboa. Pessoal, atenta, e os resultados falam por si.', treatment: 'Limpeza Profunda' },
+          { name: 'Rita C.', text: 'A Katia ouve mesmo antes de recomendar seja o que for. A minha pele nunca esteve tão uniforme.', treatment: 'Peeling Químico' },
+          { name: 'Marta A.', text: 'Um espaço calmo e acolhedor, com conhecimento técnico a sério por trás. Recomendo vivamente.', treatment: 'Tratamento de Acne' }
+        ]; %>
+        <% testimonials.forEach(function(tst) { %>
+          <div class="testimonial-card" data-reveal-item>
+            <svg class="testimonial-quote-mark" width="28" height="22" viewBox="0 0 28 22" fill="none" aria-hidden="true">
+              <path d="M0 22V13.5Q0 6 4 3T12 0V4Q8 5 6.5 7.5T5 13H10V22H0ZM16 22V13.5Q16 6 20 3T28 0V4Q24 5 22.5 7.5T21 13H26V22H16Z" fill="currentColor"/>
+            </svg>
+            <p class="testimonial-text"><%= tst.text %></p>
+            <div class="testimonial-meta">
+              <span class="testimonial-name"><%= tst.name %></span>
+              <span class="testimonial-treatment"><%= tst.treatment %></span>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
 
   <!-- CONTACT -->
   <section class="section contact-section" id="contactos">

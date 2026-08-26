@@ -5,15 +5,15 @@ const router = express.Router();
 const faqData = [
   {
     id: 'hours',
-    keywords_pt: ['horario', 'horário', 'aberto', 'abre', 'fecha', 'funciona', 'atendimento', 'que horas'],
-    keywords_en: ['hours', 'open', 'close', 'schedule', 'time', 'opening'],
+    keywords_pt: ['horario', 'horário', 'aberto', 'abre', 'fecha', 'que horas funciona', 'horario de funcionamento', 'atendimento', 'que horas'],
+    keywords_en: ['hours', 'open', 'close', 'schedule', 'opening time', 'opening hours'],
     answer_pt: 'Estamos abertos de Segunda a Sexta das 9h30 às 19h00, e Sábado das 10h00 às 15h00. Encerrado ao Domingo. Pode ver o horário completo na secção de Contactos do site.',
     answer_en: 'We are open Monday to Friday from 9:30 AM to 7:00 PM, and Saturday from 10:00 AM to 3:00 PM. Closed on Sunday. You can see the full schedule in the Contact section of the site.'
   },
   {
     id: 'booking_how',
-    keywords_pt: ['marcar', 'marcação', 'agendar', 'consulta', 'reservar', 'agenda'],
-    keywords_en: ['book', 'booking', 'appointment', 'schedule an', 'reserve'],
+    keywords_pt: ['marcar', 'marcação', 'marcações', 'marcaçao', 'marcaçoes', 'como funciona a marcação', 'como funciona as marcações', 'como funciona o agendamento', 'agendar', 'consulta', 'reservar', 'agenda', 'como marco', 'como faço uma marcação'],
+    keywords_en: ['book', 'booking', 'bookings', 'appointment', 'how does booking work', 'schedule an', 'reserve'],
     answer_pt: 'Pode marcar a sua consulta diretamente no site, clicando em "Marcar Consulta". Vai preencher os seus dados, escolher o tratamento, e a data e hora que preferir. A marcação fica pendente até a equipa confirmar.',
     answer_en: 'You can book your appointment directly on the site by clicking "Book Appointment". You\'ll fill in your details, choose the treatment, and pick your preferred date and time. The booking stays pending until our team confirms it.'
   },
@@ -156,6 +156,62 @@ const faqData = [
     keywords_en: ['thank you', 'thanks', 'thank u'],
     answer_pt: 'Com todo o gosto! Se precisar de mais alguma coisa, estou aqui.',
     answer_en: 'My pleasure! If you need anything else, I\'m here.'
+  },
+  {
+    id: 'pain',
+    keywords_pt: ['dói', 'doi', 'dor', 'incomoda', 'é doloroso', 'magoa'],
+    keywords_en: ['does it hurt', 'painful', 'pain', 'hurt'],
+    answer_pt: 'A maioria dos nossos tratamentos é indolor ou apenas ligeiramente desconfortável — a equipa adapta sempre a intensidade ao seu conforto. Pode falar sobre isso na avaliação inicial.',
+    answer_en: 'Most of our treatments are painless or only mildly uncomfortable — our team always adapts the intensity to your comfort. You can discuss this during your initial assessment.'
+  },
+  {
+    id: 'downtime',
+    keywords_pt: ['tempo de recuperação', 'fico marcada', 'vermelhidão', 'posso trabalhar depois', 'posso sair depois', 'efeitos secundários'],
+    keywords_en: ['downtime', 'recovery time', 'redness', 'can i go to work after', 'side effects'],
+    answer_pt: 'Depende do tratamento — a maioria não tem tempo de recuperação, podendo retomar a rotina normal de imediato. Tratamentos mais intensivos podem causar uma ligeira vermelhidão temporária, explicada em detalhe na consulta.',
+    answer_en: 'It depends on the treatment — most have no downtime, so you can resume your normal routine right away. More intensive treatments may cause slight temporary redness, which we\'ll explain in detail during your consultation.'
+  },
+  {
+    id: 'age',
+    keywords_pt: ['idade mínima', 'idade minima', 'a partir de que idade', 'menores', 'adolescente'],
+    keywords_en: ['minimum age', 'how old', 'teenagers', 'minors'],
+    answer_pt: 'A maioria dos nossos tratamentos é indicada a partir dos 16 anos, com consentimento de um responsável para menores. Para acne em adolescentes, temos protocolos específicos e mais suaves.',
+    answer_en: 'Most of our treatments are suitable from age 16, with a guardian\'s consent for minors. For teenage acne, we have specific, gentler protocols.'
+  },
+  {
+    id: 'men',
+    keywords_pt: ['homens', 'homem', 'masculino', 'também para homens'],
+    keywords_en: ['men', 'male', 'for men too'],
+    answer_pt: 'Sim, os nossos tratamentos são para todos — homens e mulheres. A pele masculina também beneficia muito de limpezas, tratamento de acne e hidratação.',
+    answer_en: 'Yes, our treatments are for everyone — men and women. Men\'s skin also benefits greatly from cleansing, acne treatment and hydration.'
+  },
+  {
+    id: 'payment',
+    keywords_pt: ['pagamento', 'pagar', 'multibanco', 'dinheiro', 'cartão', 'mbway', 'formas de pagamento'],
+    keywords_en: ['payment', 'pay', 'card', 'cash', 'payment methods'],
+    answer_pt: 'Aceitamos as formas de pagamento habituais no estúdio — pode confirmar os detalhes diretamente com a equipa pelo Instagram antes da sua consulta.',
+    answer_en: 'We accept the usual payment methods at the studio — you can confirm the details directly with our team via Instagram before your appointment.'
+  },
+  {
+    id: 'parking',
+    keywords_pt: ['estacionamento', 'parque', 'onde estacionar', 'acesso', 'transportes', 'metro'],
+    keywords_en: ['parking', 'where to park', 'access', 'public transport', 'metro'],
+    answer_pt: 'Estamos em Benfica, Lisboa, uma zona com boa rede de transportes e opções de estacionamento na via pública nas imediações.',
+    answer_en: 'We are in Benfica, Lisbon, an area with good public transport and street parking options nearby.'
+  },
+  {
+    id: 'gift',
+    keywords_pt: ['presente', 'oferta', 'vale de oferta', 'cartão presente', 'prenda'],
+    keywords_en: ['gift', 'gift card', 'voucher', 'present'],
+    answer_pt: 'Ainda não temos vales de oferta disponíveis diretamente no site, mas pode perguntar à equipa pelo Instagram sobre esta possibilidade.',
+    answer_en: 'We don\'t yet offer gift vouchers directly through the site, but you can ask our team via Instagram about this option.'
+  },
+  {
+    id: 'late',
+    keywords_pt: ['atraso', 'atrasar', 'vou chegar atrasada', 'chegar mais tarde'],
+    keywords_en: ['late', 'running late', 'arrive later'],
+    answer_pt: 'Se souber que vai chegar atrasada, avise-nos com antecedência pelo Instagram para ajustarmos o horário sempre que possível.',
+    answer_en: 'If you know you\'ll be running late, please let us know in advance via Instagram so we can adjust the schedule whenever possible.'
   }
 ];
 
@@ -169,15 +225,23 @@ function detectLanguage(message) {
   return enScore > ptScore ? 'en' : 'pt';
 }
 
-// Score-based matching: counts keyword hits per FAQ entry, picks the strongest match
+function stripAccents(str) {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+// Score-based matching: weights longer/more specific phrases higher than short generic words,
+// and is accent-insensitive so plurals/variants (marcação vs marcações) still match well.
 function findBestMatch(message) {
-  const lower = message.toLowerCase();
+  const lower = stripAccents(message.toLowerCase());
   let best = null;
   let bestScore = 0;
   for (const item of faqData) {
     const allKeywords = [...item.keywords_pt, ...item.keywords_en];
     let score = 0;
-    allKeywords.forEach(k => { if (lower.includes(k)) score++; });
+    allKeywords.forEach(k => {
+      const nk = stripAccents(k.toLowerCase());
+      if (lower.includes(nk)) score += nk.length;
+    });
     if (score > bestScore) {
       bestScore = score;
       best = item;
