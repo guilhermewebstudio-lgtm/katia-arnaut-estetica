@@ -279,10 +279,17 @@ p { color: var(--color-ink-soft); }
   min-width: 200px;
   padding: 0.5rem;
   display: none;
-  box-shadow: 0 12px 30px rgba(33, 43, 34, 0.1);
+  box-shadow: 0 12px 30px rgba(43,36,29,0.14);
 }
-.nav-user-menu:hover .nav-dropdown,
 .nav-dropdown.open { display: block; }
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
 .nav-dropdown a, .nav-dropdown button {
   display: block;
   width: 100%;

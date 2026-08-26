@@ -31,10 +31,16 @@
     var input = document.getElementById('chatbotInput');
     var sendBtn = document.getElementById('chatbotSend');
     var currentLang = '<%= lang %>';
+    var instaBtn = document.querySelector('.instagram-float');
 
     toggle.addEventListener('click', function() {
       win.classList.toggle('open');
-      if (win.classList.contains('open')) input.focus();
+      if (win.classList.contains('open')) {
+        input.focus();
+        if (instaBtn) instaBtn.style.display = 'none';
+      } else {
+        if (instaBtn) instaBtn.style.display = '';
+      }
     });
 
     function addMessage(text, cls) {

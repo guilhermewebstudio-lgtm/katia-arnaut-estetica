@@ -19,6 +19,23 @@ document.addEventListener('DOMContentLoaded', function () {
     a.addEventListener('click', function () { mobileMenu.classList.remove('open'); });
   });
 
+  /* ================= USER DROPDOWN (click-based, not hover) ================= */
+  var userMenu = document.querySelector('.nav-user-menu');
+  if (userMenu) {
+    var userBtn = userMenu.querySelector('.nav-user-btn');
+    var dropdown = userMenu.querySelector('.nav-dropdown');
+    userBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', function (e) {
+      if (!userMenu.contains(e.target)) {
+        dropdown.classList.remove('open');
+      }
+    });
+    dropdown.addEventListener('click', function (e) { e.stopPropagation(); });
+  }
+
   /* ================= NAV GLASS ON SCROLL ================= */
   var nav = document.querySelector('.nav');
   if (nav) {
