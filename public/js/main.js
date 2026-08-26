@@ -261,6 +261,52 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ================= LIGHTBOX ================= */
+  var lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    var lbImg = document.getElementById('lightboxImg');
+    var lbCaption = document.getElementById('lightboxCaption');
+    var lbClose = document.getElementById('lightboxClose');
+    var lbPrev = document.getElementById('lightboxPrev');
+    var lbNext = document.getElementById('lightboxNext');
+    var items = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]'));
+    var lbIndex = 0;
+
+    function openLightbox(idx) {
+      lbIndex = idx;
+      var item = items[lbIndex];
+      lbImg.src = item.dataset.src;
+      lbImg.alt = item.dataset.caption || '';
+      lbCaption.textContent = item.dataset.caption || '';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function showRelative(delta) {
+      lbIndex = (lbIndex + delta + items.length) % items.length;
+      openLightbox(lbIndex);
+    }
+
+    items.forEach(function (item, idx) {
+      item.addEventListener('click', function () { openLightbox(idx); });
+    });
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', function () { showRelative(-1); });
+    lbNext.addEventListener('click', function () { showRelative(1); });
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showRelative(-1);
+      if (e.key === 'ArrowRight') showRelative(1);
+    });
+  }
+
   /* ================= HERO CANVAS — floating particles ================= */
   var canvas = document.getElementById('heroCanvas');
   if (canvas && !reduceMotion && window.innerWidth > 640) {

@@ -6,6 +6,7 @@
       <a href="/#tratamentos" class="<%= currentPath === '/' ? 'current' : '' %>"><%= t.nav_services %></a>
       <a href="/#sobre"><%= t.nav_about %></a>
       <a href="/#equipa"><%= t.nav_team %></a>
+      <a href="/#galeria"><%= t.nav_gallery %></a>
       <a href="/#contactos"><%= t.nav_contact %></a>
       <% if (session.userId) { %>
         <a href="/as-minhas-marcacoes" class="<%= currentPath === '/as-minhas-marcacoes' ? 'current' : '' %>"><%= t.nav_my_bookings %></a>
@@ -51,6 +52,7 @@
   <a href="/#tratamentos"><%= t.nav_services %></a>
   <a href="/#sobre"><%= t.nav_about %></a>
   <a href="/#equipa"><%= t.nav_team %></a>
+  <a href="/#galeria"><%= t.nav_gallery %></a>
   <a href="/#contactos"><%= t.nav_contact %></a>
   <% if (session.userId) { %>
     <a href="/marcar"><%= t.nav_book %></a>

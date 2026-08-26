@@ -44,6 +44,7 @@ const pt = {
 
   gallery_eyebrow: 'O Espaço',
   gallery_title: 'Um ambiente desenhado para si',
+  gallery_subtitle: 'Alguns momentos do nosso espaço e do nosso trabalho. Clique numa imagem para ampliar.',
 
   contact_eyebrow: 'Fale Connosco',
   contact_title: 'Vamos desenhar a sua próxima consulta',
@@ -211,6 +212,7 @@ const en = {
 
   gallery_eyebrow: 'The Space',
   gallery_title: 'An environment designed for you',
+  gallery_subtitle: 'A few moments from our space and our work. Click an image to enlarge.',
 
   contact_eyebrow: 'Get In Touch',
   contact_title: 'Let\'s design your next consultation',
