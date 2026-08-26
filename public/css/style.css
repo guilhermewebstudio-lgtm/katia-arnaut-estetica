@@ -587,11 +587,11 @@ p { color: var(--color-ink-soft); }
 }
 
 /* ============ CONTACT ============ */
-.contact-section { background: var(--color-ink); color: var(--color-bg); }
-.contact-section .eyebrow { color: var(--color-sage-deep); }
-.contact-section .eyebrow::before { background: var(--color-sage-deep); }
-.contact-section h2 { color: var(--color-bg); }
-.contact-section p { color: #5C4E38; }
+.contact-section { background: var(--color-bg-alt); color: var(--color-ink); }
+.contact-section .eyebrow { color: var(--color-clay-soft); }
+.contact-section .eyebrow::before { background: var(--color-clay-soft); }
+.contact-section h2 { color: var(--color-ink); }
+.contact-section p { color: var(--color-ink-soft); }
 
 .contact-grid {
   display: grid;
@@ -601,7 +601,7 @@ p { color: var(--color-ink-soft); }
 }
 
 .contact-card {
-  border: 1px solid rgba(28, 22, 15, 0.14);
+  border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   padding: var(--space-4);
 }
@@ -610,20 +610,20 @@ p { color: var(--color-ink-soft); }
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-sage-deep);
+  color: var(--color-clay-soft);
   margin-bottom: 0.6em;
 }
 .contact-card-value {
   font-family: var(--font-display);
   font-size: 1.5rem;
-  color: var(--color-bg);
+  color: var(--color-ink);
 }
 
 .hours-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.85rem; }
-.hours-table td { padding: 0.5em 0; border-bottom: 1px solid rgba(28, 22, 15, 0.1); color: #5C4E38; }
-.hours-table td:last-child { text-align: right; color: var(--color-bg); }
-.hours-table tr.today td { color: var(--color-sage-deep); }
-.hours-table tr.closed td:last-child { color: #9C8A6C; }
+.hours-table td { padding: 0.5em 0; border-bottom: 1px solid var(--color-line); color: var(--color-ink-soft); }
+.hours-table td:last-child { text-align: right; color: var(--color-ink); }
+.hours-table tr.today td { color: var(--color-clay-soft); }
+.hours-table tr.closed td:last-child { color: var(--color-ink-soft); opacity: 0.7; }
 
 /* ============ FOOTER ============ */
 .footer {
@@ -651,9 +651,10 @@ p { color: var(--color-ink-soft); }
 
 /* ============ FOOTER — redesigned multi-column ============ */
 .footer-new {
-  background: var(--color-ink);
-  color: var(--color-bg);
+  background: var(--color-bg-alt);
+  color: var(--color-ink);
   padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
 }
 .footer-grid {
   display: grid;
@@ -662,14 +663,14 @@ p { color: var(--color-ink-soft); }
   padding-bottom: var(--space-5);
 }
 .footer-brand {
-  color: var(--color-bg);
+  color: var(--color-ink);
   font-size: 1.4rem;
 }
-.footer-brand small { color: var(--color-sage-deep); }
+.footer-brand small { color: var(--color-clay-soft); }
 .footer-tagline {
   margin-top: 1rem;
   font-size: 0.9rem;
-  color: #5C4E38;
+  color: var(--color-ink-soft);
   max-width: 32ch;
   line-height: 1.6;
 }
@@ -680,10 +681,10 @@ p { color: var(--color-ink-soft); }
   gap: 0.5em;
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--color-sage-deep);
+  color: var(--color-clay-soft);
   transition: color 0.25s;
 }
-.footer-insta-link:hover { color: var(--color-bg); }
+.footer-insta-link:hover { color: var(--color-ink); }
 
 .footer-col { display: flex; flex-direction: column; }
 .footer-col-title {
@@ -691,17 +692,17 @@ p { color: var(--color-ink-soft); }
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-sage-deep);
+  color: var(--color-clay-soft);
   margin-bottom: 1rem;
 }
 .footer-col a {
-  color: #5C4E38;
+  color: var(--color-ink-soft);
   font-size: 0.88rem;
   padding: 0.35em 0;
   transition: color 0.2s, padding-left 0.25s;
   width: fit-content;
 }
-.footer-col a:hover { color: var(--color-bg); padding-left: 4px; }
+.footer-col a:hover { color: var(--color-ink); padding-left: 4px; }
 
 .footer-hours-line {
   display: flex;
@@ -709,20 +710,20 @@ p { color: var(--color-ink-soft); }
   gap: 1rem;
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: #5C4E38;
+  color: var(--color-ink-soft);
   padding: 0.3em 0;
-  border-bottom: 1px solid rgba(28,22,15,0.08);
+  border-bottom: 1px solid var(--color-line);
 }
 .footer-location-text {
   margin-top: 0.5rem;
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.2rem;
-  color: var(--color-bg);
+  color: var(--color-ink);
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(28,22,15,0.12);
+  border-top: 1px solid var(--color-line);
   padding: 1.4rem 0;
   display: flex;
   justify-content: space-between;
@@ -732,7 +733,8 @@ p { color: var(--color-ink-soft); }
 .footer-bottom .footer-note {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: #8A7A5C;
+  color: var(--color-ink-soft);
+  opacity: 0.75;
 }
 
 @media (max-width: 900px) {
@@ -1111,16 +1113,18 @@ body.preloading { opacity: 1; }
 /* ============ SIGNATURE QUOTE SECTION ============ */
 .signature-section {
   padding: var(--space-6) 0;
-  background: var(--color-ink);
-  color: var(--color-bg);
+  background: var(--color-bg-alt);
+  color: var(--color-ink);
   text-align: center;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
 }
 .signature-inner {
   max-width: 720px;
   margin: 0 auto;
 }
 .signature-mark {
-  color: var(--color-sage-deep);
+  color: var(--color-clay-soft);
   margin-bottom: var(--space-3);
 }
 .signature-quote {
@@ -1129,7 +1133,7 @@ body.preloading { opacity: 1; }
   font-size: clamp(1.5rem, 3vw, 2.1rem);
   font-weight: 400;
   line-height: 1.4;
-  color: var(--color-bg);
+  color: var(--color-ink);
 }
 .signature-attribution {
   margin-top: var(--space-3);
@@ -1143,11 +1147,11 @@ body.preloading { opacity: 1; }
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-sage-deep);
+  color: var(--color-clay-soft);
 }
 .signature-role {
   font-size: 0.85rem;
-  color: #6E5E44;
+  color: var(--color-ink-soft);
 }
 
 /* ============ TESTIMONIALS ============ */
