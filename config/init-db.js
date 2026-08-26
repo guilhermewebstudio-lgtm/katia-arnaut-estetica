@@ -57,6 +57,10 @@ async function initDb() {
       );
     `);
 
+    await client.query(`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS contact_name VARCHAR(150);`);
+    await client.query(`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS contact_email VARCHAR(150);`);
+    await client.query(`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS contact_phone VARCHAR(30);`);
+
     await client.query(`
       CREATE TABLE IF NOT EXISTS team_members (
         id SERIAL PRIMARY KEY,

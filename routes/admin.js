@@ -12,7 +12,10 @@ router.get('/gestao', async (req, res) => {
 router.get('/gestao/marcacoes', async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT b.*, s.name_pt, s.name_en, u.name AS user_name, u.email AS user_email, u.phone AS user_phone
+      `SELECT b.*, s.name_pt, s.name_en,
+              COALESCE(b.contact_name, u.name) AS user_name,
+              COALESCE(b.contact_email, u.email) AS user_email,
+              COALESCE(b.contact_phone, u.phone) AS user_phone
        FROM bookings b
        JOIN services s ON b.service_id = s.id
        JOIN users u ON b.user_id = u.id

@@ -3,7 +3,7 @@
 <head>
   <%- include('partials/head') %>
 </head>
-<body>
+<body data-page="booking">
   <%- include('partials/nav') %>
 
   <div class="page-header">
@@ -22,38 +22,122 @@
       <div class="form-error"><%= error %></div>
     <% } %>
 
-    <form method="POST" action="/marcar">
-      <div class="field">
-        <label for="service_id"><%= t.booking_service %></label>
-        <select id="service_id" name="service_id" required>
-          <option value=""><%= t.booking_select_service %></option>
-          <% services.forEach(function(s) { %>
-            <option value="<%= s.id %>">
-              <%= lang === 'en' ? s.name_en : s.name_pt %>
-              <% if (s.price) { %> — €<%= parseFloat(s.price).toFixed(0) %><% } %>
-              (<%= s.duration_minutes %> <%= t.service_duration %>)
-            </option>
-          <% }); %>
-        </select>
+    <form method="POST" action="/marcar" id="bookingWizard" class="wizard" data-msg-required="<%= t.wizard_required %>">
+      <div class="wizard-step-label">
+        <span class="current"><%= t.wizard_label_dados %></span>
+        <span><%= t.wizard_label_tratamento %></span>
+        <span><%= t.wizard_label_data_hora %></span>
+        <span><%= t.wizard_label_confirmar %></span>
+      </div>
+      <div class="wizard-progress">
+        <div class="wizard-step-dot active"></div>
+        <div class="wizard-step-dot"></div>
+        <div class="wizard-step-dot"></div>
+        <div class="wizard-step-dot"></div>
       </div>
 
-      <div class="field-row">
+      <!-- STEP 1: Contact details -->
+      <div class="wizard-panel active">
+        <h3 style="margin-bottom:0.3rem;"><%= t.wizard_step1_title %></h3>
+        <p style="margin-bottom:1.5rem;font-size:0.92rem;"><%= t.wizard_step1_sub %></p>
+
+        <div class="field">
+          <label for="full_name"><%= t.wizard_full_name %></label>
+          <input type="text" id="full_name" name="full_name" required value="<%= user.name || '' %>">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="email"><%= t.wizard_email %></label>
+            <input type="email" id="email" name="email" required value="<%= user.email || '' %>">
+          </div>
+          <div class="field">
+            <label for="phone"><%= t.wizard_phone %></label>
+            <input type="tel" id="phone" name="phone" required value="<%= user.phone || '' %>">
+          </div>
+        </div>
+
+        <div class="wizard-nav">
+          <span></span>
+          <button type="button" class="btn btn-primary" data-next><%= t.wizard_next %></button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Service -->
+      <div class="wizard-panel">
+        <h3 style="margin-bottom:0.3rem;"><%= t.wizard_step2_title %></h3>
+        <p style="margin-bottom:1.5rem;font-size:0.92rem;"><%= t.wizard_step2_sub %></p>
+
+        <div class="service-select-grid">
+          <% services.forEach(function(s, i) { %>
+            <label class="service-option <%= i === 0 ? 'selected' : '' %>">
+              <input type="radio" name="service_id" value="<%= s.id %>" required <%= i === 0 ? 'checked' : '' %>>
+              <div class="service-option-name"><%= lang === 'en' ? s.name_en : s.name_pt %></div>
+              <div class="service-option-meta">
+                <span><% if (s.price) { %>€<%= parseFloat(s.price).toFixed(0) %><% } %></span>
+                <span><%= s.duration_minutes %> <%= t.service_duration %></span>
+              </div>
+            </label>
+          <% }); %>
+        </div>
+
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-outline" data-prev><%= t.wizard_back %></button>
+          <button type="button" class="btn btn-primary" data-next><%= t.wizard_next %></button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Date & time -->
+      <div class="wizard-panel">
+        <h3 style="margin-bottom:0.3rem;"><%= t.wizard_step3_title %></h3>
+        <p style="margin-bottom:1.5rem;font-size:0.92rem;"><%= t.wizard_step3_sub %></p>
+
         <div class="field">
           <label for="booking_date"><%= t.booking_date %></label>
           <input type="date" id="booking_date" name="booking_date" required min="<%= new Date().toISOString().split('T')[0] %>">
         </div>
+
         <div class="field">
-          <label for="booking_time"><%= t.booking_time %></label>
-          <input type="time" id="booking_time" name="booking_time" required>
+          <label><%= t.booking_time %></label>
+          <div class="time-slot-grid">
+            <% ['09:30','10:15','11:00','11:45','14:00','14:45','15:30','16:15','17:00','17:45'].forEach(function(time, i) { %>
+              <label class="time-slot <%= i === 0 ? 'selected' : '' %>" data-label="<%= time %>">
+                <input type="radio" name="booking_time" value="<%= time %>" required <%= i === 0 ? 'checked' : '' %>>
+                <%= time %>
+              </label>
+            <% }); %>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="notes"><%= t.booking_notes %></label>
+          <textarea id="notes" name="notes" placeholder="<%= t.booking_notes_placeholder %>"></textarea>
+        </div>
+
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-outline" data-prev><%= t.wizard_back %></button>
+          <button type="button" class="btn btn-primary" data-next><%= t.wizard_next %></button>
         </div>
       </div>
 
-      <div class="field">
-        <label for="notes"><%= t.booking_notes %></label>
-        <textarea id="notes" name="notes" placeholder="<%= t.booking_notes_placeholder %>"></textarea>
-      </div>
+      <!-- STEP 4: Confirm -->
+      <div class="wizard-panel">
+        <h3 style="margin-bottom:0.3rem;"><%= t.wizard_step4_title %></h3>
+        <p style="margin-bottom:1.5rem;font-size:0.92rem;"><%= t.wizard_step4_sub %></p>
 
-      <button type="submit" class="btn btn-primary btn-block"><%= t.booking_submit %></button>
+        <div class="wizard-summary" id="wizardSummary"
+             data-l-name="<%= t.wizard_summary_name %>"
+             data-l-email="<%= t.wizard_summary_email %>"
+             data-l-phone="<%= t.wizard_summary_phone %>"
+             data-l-service="<%= t.wizard_summary_service %>"
+             data-l-date="<%= t.wizard_summary_date %>"
+             data-l-time="<%= t.wizard_summary_time %>">
+        </div>
+
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-outline" data-prev><%= t.wizard_back %></button>
+          <button type="submit" class="btn btn-clay"><%= t.booking_submit %></button>
+        </div>
+      </div>
     </form>
   </div>
 

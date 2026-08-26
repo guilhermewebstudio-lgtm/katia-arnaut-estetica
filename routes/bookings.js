@@ -6,27 +6,35 @@ const { requireAuth } = require('../middleware/auth');
 router.get('/marcar', requireAuth, async (req, res) => {
   try {
     const services = await pool.query('SELECT * FROM services WHERE active = TRUE ORDER BY display_order ASC');
-    res.render('booking', { services: services.rows, success: false, error: null });
+    const userResult = await pool.query('SELECT name, email, phone FROM users WHERE id = $1', [req.session.userId]);
+    res.render('booking', {
+      services: services.rows,
+      success: false,
+      error: null,
+      user: userResult.rows[0] || {}
+    });
   } catch (err) {
     console.error('Erro ao carregar tratamentos:', err);
-    res.render('booking', { services: [], success: false, error: 'Erro ao carregar tratamentos.' });
+    res.render('booking', { services: [], success: false, error: 'Erro ao carregar tratamentos.', user: {} });
   }
 });
 
 router.post('/marcar', requireAuth, async (req, res) => {
-  const { service_id, booking_date, booking_time, notes } = req.body;
+  const { service_id, booking_date, booking_time, notes, full_name, email, phone } = req.body;
   try {
     await pool.query(
-      `INSERT INTO bookings (user_id, service_id, booking_date, booking_time, notes, status)
-       VALUES ($1,$2,$3,$4,$5,'pending')`,
-      [req.session.userId, service_id, booking_date, booking_time, notes || null]
+      `INSERT INTO bookings (user_id, service_id, booking_date, booking_time, notes, status, contact_name, contact_email, contact_phone)
+       VALUES ($1,$2,$3,$4,$5,'pending',$6,$7,$8)`,
+      [req.session.userId, service_id, booking_date, booking_time, notes || null, full_name || null, email || null, phone || null]
     );
     const services = await pool.query('SELECT * FROM services WHERE active = TRUE ORDER BY display_order ASC');
-    res.render('booking', { services: services.rows, success: true, error: null });
+    const userResult = await pool.query('SELECT name, email, phone FROM users WHERE id = $1', [req.session.userId]);
+    res.render('booking', { services: services.rows, success: true, error: null, user: userResult.rows[0] || {} });
   } catch (err) {
     console.error('Erro ao criar marcação:', err);
     const services = await pool.query('SELECT * FROM services WHERE active = TRUE ORDER BY display_order ASC');
-    res.render('booking', { services: services.rows, success: false, error: 'Não foi possível criar a marcação.' });
+    const userResult = await pool.query('SELECT name, email, phone FROM users WHERE id = $1', [req.session.userId]);
+    res.render('booking', { services: services.rows, success: false, error: 'Não foi possível criar a marcação.', user: userResult.rows[0] || {} });
   }
 });
 
