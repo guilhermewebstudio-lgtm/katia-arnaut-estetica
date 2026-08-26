@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+  /* ================= PAGE FADE-IN ================= */
+  requestAnimationFrame(function () {
+    document.body.classList.add('page-ready');
+  });
+
+  /* ================= GRAIN TEXTURE OVERLAY ================= */
+  var grain = document.createElement('div');
+  grain.className = 'grain-overlay';
+  document.body.appendChild(grain);
+
   /* ================= MOBILE MENU ================= */
   var mobileToggle = document.getElementById('mobileToggle');
   var mobileClose = document.getElementById('mobileClose');
@@ -18,6 +28,21 @@ document.addEventListener('DOMContentLoaded', function () {
   mobileMenu && mobileMenu.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', function () { mobileMenu.classList.remove('open'); });
   });
+
+  /* ================= NAV SLIDING INDICATOR ================= */
+  var navLinksWrap = document.querySelector('.nav-links');
+  if (navLinksWrap) {
+    var indicator = document.createElement('div');
+    indicator.className = 'nav-indicator';
+    navLinksWrap.appendChild(indicator);
+    var navAnchors = Array.prototype.slice.call(navLinksWrap.querySelectorAll('a'));
+    navAnchors.forEach(function (a) {
+      a.addEventListener('mouseenter', function () {
+        indicator.style.left = a.offsetLeft + 'px';
+        indicator.style.width = a.offsetWidth + 'px';
+      });
+    });
+  }
 
   /* ================= USER DROPDOWN (click-based, not hover) ================= */
   var userMenu = document.querySelector('.nav-user-menu');
@@ -97,7 +122,51 @@ document.addEventListener('DOMContentLoaded', function () {
       ease: 'power3.out',
       stagger: 0.12
     });
+    var splitInner = document.querySelectorAll('.split-word-inner');
+    if (splitInner.length) {
+      gsap.to(splitInner, {
+        y: 0,
+        duration: 1.1,
+        ease: 'power4.out',
+        stagger: 0.06,
+        delay: 0.15
+      });
+    }
   }
+
+  /* ================= SPLIT HERO TITLE INTO WORDS ================= */
+  (function splitHeroTitle() {
+    var titleEl = document.querySelector('.hero-title-cinematic');
+    if (!titleEl || titleEl.dataset.split) return;
+    titleEl.dataset.split = '1';
+    var html = titleEl.innerHTML;
+    var wrapper = document.createElement('div');
+    wrapper.innerHTML = html;
+
+    function wrapWords(node) {
+      Array.prototype.forEach.call(node.childNodes, function (child) {
+        if (child.nodeType === 3) {
+          var words = child.textContent.split(/(\s+)/);
+          var frag = document.createDocumentFragment();
+          words.forEach(function (w) {
+            if (w.trim() === '') { frag.appendChild(document.createTextNode(w)); return; }
+            var span = document.createElement('span');
+            span.className = 'split-word';
+            var inner = document.createElement('span');
+            inner.className = 'split-word-inner';
+            inner.textContent = w;
+            span.appendChild(inner);
+            frag.appendChild(span);
+          });
+          child.parentNode.replaceChild(frag, child);
+        } else if (child.nodeType === 1) {
+          wrapWords(child);
+        }
+      });
+    }
+    wrapWords(wrapper);
+    titleEl.innerHTML = wrapper.innerHTML;
+  })();
 
   // Preloader plays on every homepage load (and always on logo click)
   var isHome = document.body.dataset.page === 'home';
@@ -152,6 +221,21 @@ document.addEventListener('DOMContentLoaded', function () {
           ease: 'none',
           scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 0.6 }
         });
+      });
+
+      // image wipe reveal — clip-path sweep on scroll entrance
+      document.querySelectorAll('.about-visual img, .gallery-item img').forEach(function (img) {
+        gsap.fromTo(img,
+          { clipPath: 'inset(0 0 0 100%)', scale: 1.12 },
+          {
+            clipPath: 'inset(0 0 0 0%)',
+            scale: 1,
+            duration: 1.1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: img, start: 'top 90%' },
+            onComplete: function () { gsap.set(img, { clearProps: 'transform' }); }
+          }
+        );
       });
     } else {
       document.querySelectorAll('[data-reveal], [data-reveal-item]').forEach(function (el) {

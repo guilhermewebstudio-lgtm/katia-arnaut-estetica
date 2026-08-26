@@ -136,6 +136,7 @@
               <% } else { %>
                 <img src="<%= teamPhotos[mi % teamPhotos.length] %>" alt="<%= member.name %>" loading="lazy">
               <% } %>
+              <span class="team-photo-caption"><%= lang === 'en' ? member.role_en : member.role_pt %></span>
             </div>
             <h3><%= member.name %></h3>
             <div class="team-role"><%= lang === 'en' ? member.role_en : member.role_pt %></div>
