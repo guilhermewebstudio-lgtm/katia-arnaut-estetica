@@ -163,6 +163,93 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  /* ================= CURSOR GLOW ================= */
+  if (window.innerWidth > 900 && !reduceMotion) {
+    var glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    document.body.appendChild(glow);
+    var glowX = 0, glowY = 0, curX = 0, curY = 0;
+    document.addEventListener('mousemove', function (e) {
+      glowX = e.clientX; glowY = e.clientY;
+      glow.style.opacity = 1;
+    });
+    function animGlow() {
+      curX += (glowX - curX) * 0.12;
+      curY += (glowY - curY) * 0.12;
+      glow.style.left = curX + 'px';
+      glow.style.top = curY + 'px';
+      requestAnimationFrame(animGlow);
+    }
+    animGlow();
+  }
+
+  /* ================= MAGNETIC BUTTONS ================= */
+  if (window.innerWidth > 900 && !reduceMotion && typeof gsap !== 'undefined') {
+    document.querySelectorAll('.btn-primary, .btn-clay, .chatbot-toggle, .instagram-float').forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+        gsap.to(btn, { x: x * 0.28, y: y * 0.28, duration: 0.4, ease: 'power2.out' });
+      });
+      btn.addEventListener('mouseleave', function () {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' });
+      });
+    });
+  }
+
+  /* ================= TILT ON SERVICE / TEAM CARDS ================= */
+  if (window.innerWidth > 900 && !reduceMotion && typeof gsap !== 'undefined') {
+    document.querySelectorAll('.service-card, .team-photo').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width - 0.5;
+        var py = (e.clientY - rect.top) / rect.height - 0.5;
+        gsap.to(card, { rotateY: px * 6, rotateX: -py * 6, duration: 0.5, ease: 'power2.out', transformPerspective: 800 });
+      });
+      card.addEventListener('mouseleave', function () {
+        gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'power3.out' });
+      });
+    });
+  }
+
+  /* ================= MARQUEE duplicate content for seamless loop ================= */
+  document.querySelectorAll('.marquee-track').forEach(function (track) {
+    track.innerHTML += track.innerHTML;
+  });
+
+  /* ================= SPLIT-TEXT HERO TITLE (char stagger) ================= */
+  var heroTitle = document.querySelector('.hero-title');
+  if (heroTitle && typeof gsap !== 'undefined' && !reduceMotion && isHomeInit()) {
+    // handled within hero fade via data-hero-in; kept simple for performance
+  }
+  function isHomeInit() { return document.body.dataset.page === 'home'; }
+
+  /* ================= NUMBER COUNT-UP ON SCROLL ================= */
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reduceMotion) {
+    document.querySelectorAll('.about-stat-num').forEach(function (el) {
+      var raw = el.textContent.trim();
+      var match = raw.match(/^(\d+)(.*)$/);
+      if (!match) return;
+      var target = parseInt(match[1], 10);
+      var suffix = match[2] || '';
+      var obj = { val: 0 };
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 90%',
+        once: true,
+        onEnter: function () {
+          gsap.to(obj, {
+            val: target,
+            duration: 1.4,
+            ease: 'power2.out',
+            onUpdate: function () { el.textContent = Math.round(obj.val) + suffix; }
+          });
+        }
+      });
+    });
+  }
+
   /* ================= HERO CANVAS — floating particles ================= */
   var canvas = document.getElementById('heroCanvas');
   if (canvas && !reduceMotion && window.innerWidth > 640) {

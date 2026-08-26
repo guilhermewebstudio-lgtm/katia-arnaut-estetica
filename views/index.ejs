@@ -73,6 +73,17 @@
     </div>
   </section>
 
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span><%= lang === 'en' ? 'Facial Cleansing' : 'Limpeza de Pele' %></span>
+      <span><%= lang === 'en' ? 'Acne Treatment' : 'Tratamento de Acne' %></span>
+      <span><%= lang === 'en' ? 'Chemical Peel' : 'Peeling Químico' %></span>
+      <span><%= lang === 'en' ? 'Microneedling' : 'Microagulhamento' %></span>
+      <span><%= lang === 'en' ? 'Radiofrequency' : 'Radiofrequência' %></span>
+      <span>Benfica, Lisboa</span>
+    </div>
+  </div>
+
   <!-- SERVICES -->
   <section class="section" id="tratamentos">
     <div class="container">
@@ -102,11 +113,7 @@
   <section class="section about-section" id="sobre">
     <div class="container about-grid">
       <div class="about-visual" data-reveal data-parallax>
-        <div class="placeholder-fill">
-          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>
-          </svg>
-        </div>
+        <img src="https://picsum.photos/seed/kae-about/700/900" alt="Katia Arnaut Estética" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div data-reveal>
         <span class="eyebrow"><%= t.about_eyebrow %></span>
@@ -142,17 +149,13 @@
       </div>
 
       <div class="team-grid" data-reveal-group>
-        <% team.forEach(function(member) { %>
+        <% team.forEach(function(member, mi) { %>
           <div class="team-card" data-reveal-item>
             <div class="team-photo">
               <% if (member.photo_url) { %>
                 <img src="<%= member.photo_url %>" alt="<%= member.name %>">
               <% } else { %>
-                <div class="placeholder-fill">
-                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                    <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>
-                  </svg>
-                </div>
+                <img src="https://picsum.photos/seed/kae-team-<%= mi %>/500/620" alt="<%= member.name %>" loading="lazy">
               <% } %>
             </div>
             <h3><%= member.name %></h3>
@@ -174,11 +177,7 @@
       <div class="gallery-grid" data-reveal-group>
         <% for (let i = 0; i < 8; i++) { %>
           <div class="gallery-item <%= i === 0 || i === 5 ? 'tall' : '' %>" data-reveal-item>
-            <div class="placeholder-fill">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/>
-              </svg>
-            </div>
+            <img src="https://picsum.photos/seed/kae-gallery-<%= i %>/600/<%= (i === 0 || i === 5) ? 760 : 380 %>" alt="Katia Arnaut Estética" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
           </div>
         <% } %>
       </div>
