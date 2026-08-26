@@ -94,18 +94,4 @@ router.post('/api/chatbot', async (req, res) => {
   res.json({ reply, lang: detectedLang });
 });
 
-router.post('/sugestoes', async (req, res) => {
-  if (!req.session.userId) {
-    return res.redirect('/login');
-  }
-  const { message } = req.body;
-  try {
-    await pool.query('INSERT INTO suggestions (user_id, message) VALUES ($1, $2)', [req.session.userId, message]);
-    res.redirect('back');
-  } catch (err) {
-    console.error('Erro ao enviar sugestão:', err);
-    res.redirect('back');
-  }
-});
-
 module.exports = router;

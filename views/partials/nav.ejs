@@ -24,6 +24,7 @@
           <div class="nav-dropdown">
             <a href="/marcar"><%= t.nav_book %></a>
             <a href="/as-minhas-marcacoes"><%= t.nav_my_bookings %></a>
+            <a href="/sugestoes"><%= t.nav_suggestions %></a>
             <% if (session.isAdmin) { %>
               <a href="/gestao/marcacoes"><%= t.nav_admin %></a>
             <% } %>
@@ -54,6 +55,7 @@
   <% if (session.userId) { %>
     <a href="/marcar"><%= t.nav_book %></a>
     <a href="/as-minhas-marcacoes"><%= t.nav_my_bookings %></a>
+    <a href="/sugestoes"><%= t.nav_suggestions %></a>
     <% if (session.isAdmin) { %><a href="/gestao/marcacoes"><%= t.nav_admin %></a><% } %>
   <% } else { %>
     <a href="/login"><%= t.nav_login %></a>

@@ -48,6 +48,7 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/pages'));
 app.use('/', require('./routes/auth'));
 app.use('/', require('./routes/bookings'));
+app.use('/', require('./routes/suggestions'));
 app.use('/', require('./routes/admin'));
 app.use('/', require('./routes/chatbot'));
 
