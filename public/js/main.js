@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function () {
     resize();
     window.addEventListener('resize', resize);
 
-    var colors = ['rgba(126,145,128,0.35)', 'rgba(185,128,114,0.3)', 'rgba(92,110,94,0.25)'];
+    var colors = ['rgba(169,130,47,0.35)', 'rgba(201,163,86,0.3)', 'rgba(138,106,38,0.25)'];
     for (var i = 0; i < 26; i++) {
       particles.push({
         x: Math.random() * W,

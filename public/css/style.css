@@ -8,18 +8,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  /* Colors — deep emerald & champagne gold, ivory canvas */
-  --color-bg: #F8F5EE;
-  --color-bg-alt: #F0EAD9;
+  /* Colors — warm gold & espresso, cream canvas (matching the studio's real space) */
+  --color-bg: #F8F4EC;
+  --color-bg-alt: #EFE5D3;
   --color-card: #FFFFFF;
-  --color-ink: #14201A;
-  --color-ink-soft: #4E5A52;
-  --color-sage: #3F5F4C;
-  --color-sage-deep: #24402F;
-  --color-clay: #B6924F;
-  --color-clay-soft: #E3CFA0;
-  --color-line: #E1D8C3;
-  --color-line-strong: #CBBB98;
+  --color-ink: #2B241D;
+  --color-ink-soft: #6B5D4E;
+  --color-sage: #A9822F;
+  --color-sage-deep: #8A6A26;
+  --color-clay: #C9A356;
+  --color-clay-soft: #E9D9AF;
+  --color-line: #E4D8C0;
+  --color-line-strong: #CDBA95;
   --color-white: #FFFFFF;
   --color-error: #A3492F;
 
@@ -898,7 +898,7 @@ p { color: var(--color-ink-soft); }
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
-  background: radial-gradient(circle, rgba(126,145,128,0.10) 0%, rgba(185,128,114,0.06) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(169,130,47,0.10) 0%, rgba(201,163,86,0.08) 45%, transparent 70%);
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity 0.4s;
@@ -1119,8 +1119,8 @@ body.preloading {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(180deg, rgba(20,32,26,0.35) 0%, rgba(20,32,26,0.25) 40%, rgba(20,32,26,0.88) 100%),
-    linear-gradient(90deg, rgba(20,32,26,0.55) 0%, rgba(20,32,26,0.05) 55%);
+    linear-gradient(180deg, rgba(43,36,29,0.35) 0%, rgba(43,36,29,0.25) 40%, rgba(43,36,29,0.90) 100%),
+    linear-gradient(90deg, rgba(43,36,29,0.55) 0%, rgba(43,36,29,0.05) 55%);
 }
 .hero-cinematic .container {
   position: relative;
