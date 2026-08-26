@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/nav') %>
+
+  <div class="page-header">
+    <div class="container">
+      <span class="eyebrow"><%= t.hero_eyebrow %></span>
+      <h2><%= t.booking_title %></h2>
+      <p class="section-subtitle"><%= t.booking_subtitle %></p>
+    </div>
+  </div>
+
+  <div class="booking-form-wrap">
+    <% if (success) { %>
+      <div class="form-success"><%= t.booking_success %></div>
+    <% } %>
+    <% if (error) { %>
+      <div class="form-error"><%= error %></div>
+    <% } %>
+
+    <form method="POST" action="/marcar">
+      <div class="field">
+        <label for="service_id"><%= t.booking_service %></label>
+        <select id="service_id" name="service_id" required>
+          <option value=""><%= t.booking_select_service %></option>
+          <% services.forEach(function(s) { %>
+            <option value="<%= s.id %>">
+              <%= lang === 'en' ? s.name_en : s.name_pt %>
+              <% if (s.price) { %> — €<%= parseFloat(s.price).toFixed(0) %><% } %>
+              (<%= s.duration_minutes %> <%= t.service_duration %>)
+            </option>
+          <% }); %>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="booking_date"><%= t.booking_date %></label>
+          <input type="date" id="booking_date" name="booking_date" required min="<%= new Date().toISOString().split('T')[0] %>">
+        </div>
+        <div class="field">
+          <label for="booking_time"><%= t.booking_time %></label>
+          <input type="time" id="booking_time" name="booking_time" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="notes"><%= t.booking_notes %></label>
+        <textarea id="notes" name="notes" placeholder="<%= t.booking_notes_placeholder %>"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block"><%= t.booking_submit %></button>
+    </form>
+  </div>
+
+  <%- include('partials/footer') %>
+  <script src="/js/main.js"></script>
+</body>
+</html>

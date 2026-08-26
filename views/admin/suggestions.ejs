@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/nav') %>
+
+  <div class="admin-layout">
+    <%- include('../partials/admin-sidebar') %>
+
+    <div class="admin-content">
+      <h2><%= t.admin_suggestions %></h2>
+
+      <% if (suggestions.length === 0) { %>
+        <p><%= lang === 'en' ? 'No suggestions yet.' : 'Ainda sem sugestões.' %></p>
+      <% } %>
+
+      <% suggestions.forEach(function(s) { %>
+        <div class="admin-card">
+          <p style="color:var(--color-ink-soft);font-size:0.8rem;font-family:var(--font-mono);"><%= s.user_name %> · <%= s.user_email %> · <%= new Date(s.created_at).toLocaleDateString(lang === 'en' ? 'en-GB' : 'pt-PT') %></p>
+          <p style="margin-top:0.6rem;"><%= s.message %></p>
+          <% if (s.admin_response) { %>
+            <div style="margin-top:0.8rem;padding:0.8rem;background:var(--color-bg-alt);border-radius:4px;">
+              <strong style="font-size:0.8rem;"><%= lang === 'en' ? 'Response:' : 'Resposta:' %></strong>
+              <p style="margin-top:0.3rem;"><%= s.admin_response %></p>
+            </div>
+          <% } else { %>
+            <form action="/gestao/sugestoes/<%= s.id %>/responder" method="POST" style="margin-top:0.8rem;">
+              <div class="field">
+                <textarea name="admin_response" placeholder="<%= lang === 'en' ? 'Write a response...' : 'Escreva uma resposta...' %>" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm"><%= lang === 'en' ? 'Reply' : 'Responder' %></button>
+            </form>
+          <% } %>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/nav') %>
+
+  <div class="admin-layout">
+    <%- include('../partials/admin-sidebar') %>
+
+    <div class="admin-content">
+      <h2><%= t.admin_team %></h2>
+
+      <% team.forEach(function(m) { %>
+        <div class="admin-card">
+          <form action="/gestao/equipa/<%= m.id %>" method="POST">
+            <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="field">
+                <label>Nome</label>
+                <input type="text" name="name" value="<%= m.name %>" required>
+              </div>
+              <div class="field">
+                <label>URL da foto</label>
+                <input type="text" name="photo_url" value="<%= m.photo_url || '' %>" placeholder="https://...">
+              </div>
+            </div>
+            <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="field">
+                <label>Função (PT)</label>
+                <input type="text" name="role_pt" value="<%= m.role_pt || '' %>">
+              </div>
+              <div class="field">
+                <label>Role (EN)</label>
+                <input type="text" name="role_en" value="<%= m.role_en || '' %>">
+              </div>
+            </div>
+            <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="field">
+                <label>Bio (PT)</label>
+                <textarea name="bio_pt"><%= m.bio_pt || '' %></textarea>
+              </div>
+              <div class="field">
+                <label>Bio (EN)</label>
+                <textarea name="bio_en"><%= m.bio_en || '' %></textarea>
+              </div>
+            </div>
+            <div class="toggle-row" style="margin-bottom:0.8rem;">
+              <input type="checkbox" name="active" id="team-active-<%= m.id %>" <%= m.active ? 'checked' : '' %>>
+              <label for="team-active-<%= m.id %>" style="text-transform:none;font-family:var(--font-body);font-size:0.9rem;"><%= t.admin_active %></label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm"><%= t.admin_save %></button>
+          </form>
+          <form action="/gestao/equipa/<%= m.id %>/eliminar" method="POST" onsubmit="return confirm('Eliminar este membro?');" style="margin-top:0.5rem;">
+            <button type="submit" class="btn btn-outline btn-sm"><%= t.admin_delete %></button>
+          </form>
+        </div>
+      <% }); %>
+
+      <div class="admin-card">
+        <h3 style="margin-bottom:1rem;">Adicionar membro</h3>
+        <form action="/gestao/equipa" method="POST">
+          <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="field">
+              <label>Nome</label>
+              <input type="text" name="name" required>
+            </div>
+            <div class="field">
+              <label>URL da foto</label>
+              <input type="text" name="photo_url" placeholder="https://...">
+            </div>
+          </div>
+          <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="field">
+              <label>Função (PT)</label>
+              <input type="text" name="role_pt">
+            </div>
+            <div class="field">
+              <label>Role (EN)</label>
+              <input type="text" name="role_en">
+            </div>
+          </div>
+          <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="field">
+              <label>Bio (PT)</label>
+              <textarea name="bio_pt"></textarea>
+            </div>
+            <div class="field">
+              <label>Bio (EN)</label>
+              <textarea name="bio_en"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm">Adicionar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

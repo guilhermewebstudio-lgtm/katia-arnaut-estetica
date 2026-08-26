@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/nav') %>
+
+  <div class="page-header">
+    <div class="container">
+      <span class="eyebrow"><%= t.hero_eyebrow %></span>
+      <h2><%= t.my_bookings_title %></h2>
+    </div>
+  </div>
+
+  <div class="container bookings-list">
+    <% if (bookings.length === 0) { %>
+      <div class="empty-state">
+        <p><%= t.my_bookings_empty %></p>
+        <a href="/marcar" class="btn btn-primary" style="margin-top:1.5rem;"><%= t.nav_book %></a>
+      </div>
+    <% } else { %>
+      <% const months = lang === 'en'
+        ? ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
+        : ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+      %>
+      <% bookings.forEach(function(b) {
+        const d = new Date(b.booking_date);
+      %>
+        <div class="booking-row">
+          <div class="booking-date-badge">
+            <span class="d"><%= d.getUTCDate() %></span>
+            <span class="m"><%= months[d.getUTCMonth()] %></span>
+          </div>
+          <div>
+            <h3 style="font-size:1.05rem;"><%= lang === 'en' ? b.name_en : b.name_pt %></h3>
+            <p style="font-size:0.85rem;"><%= b.booking_time.slice(0,5) %><% if (b.price) { %> · €<%= parseFloat(b.price).toFixed(0) %><% } %></p>
+          </div>
+          <span class="status-badge status-<%= b.status %>"><%= t['status_' + b.status] %></span>
+          <% if (b.status === 'pending' || b.status === 'confirmed') { %>
+            <form action="/marcacoes/<%= b.id %>/cancelar" method="POST" onsubmit="return confirm('<%= lang === 'en' ? 'Cancel this booking?' : 'Cancelar esta marcação?' %>');">
+              <button type="submit" class="btn btn-outline btn-sm"><%= t.my_bookings_cancel %></button>
+            </form>
+          <% } %>
+        </div>
+      <% }); %>
+    <% } %>
+  </div>
+
+  <%- include('partials/footer') %>
+  <script src="/js/main.js"></script>
+</body>
+</html>

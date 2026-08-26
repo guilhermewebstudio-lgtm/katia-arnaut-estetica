@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/nav') %>
+
+  <div class="admin-layout">
+    <%- include('../partials/admin-sidebar') %>
+
+    <div class="admin-content">
+      <h2><%= t.admin_hours %></h2>
+
+      <% const dayKeys = ['day_0','day_1','day_2','day_3','day_4','day_5','day_6']; %>
+      <% hours.forEach(function(h) { %>
+        <div class="admin-card">
+          <form action="/gestao/horario/<%= h.day_of_week %>" method="POST" class="inline-form">
+            <strong style="min-width:100px;"><%= t[dayKeys[h.day_of_week]] %></strong>
+            <div class="field">
+              <label>Abre</label>
+              <input type="time" name="open_time" value="<%= h.open_time ? h.open_time.slice(0,5) : '' %>">
+            </div>
+            <div class="field">
+              <label>Fecha</label>
+              <input type="time" name="close_time" value="<%= h.close_time ? h.close_time.slice(0,5) : '' %>">
+            </div>
+            <div class="toggle-row" style="padding-bottom:0.75em;">
+              <input type="checkbox" name="is_closed" id="closed-<%= h.day_of_week %>" <%= h.is_closed ? 'checked' : '' %>>
+              <label for="closed-<%= h.day_of_week %>" style="text-transform:none;font-family:var(--font-body);font-size:0.9rem;"><%= t.admin_closed %></label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm"><%= t.admin_save %></button>
+          </form>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

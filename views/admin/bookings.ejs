@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/nav') %>
+
+  <div class="admin-layout">
+    <%- include('../partials/admin-sidebar') %>
+
+    <div class="admin-content">
+      <h2><%= t.admin_bookings %></h2>
+
+      <% if (bookings.length === 0) { %>
+        <p><%= t.admin_no_bookings %></p>
+      <% } else { %>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th><%= t.booking_date %></th>
+              <th><%= t.booking_service %></th>
+              <th><%= lang === 'en' ? 'Client' : 'Cliente' %></th>
+              <th><%= lang === 'en' ? 'Status' : 'Estado' %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% bookings.forEach(function(b) { %>
+              <tr>
+                <td>
+                  <%= new Date(b.booking_date).toLocaleDateString(lang === 'en' ? 'en-GB' : 'pt-PT', { timeZone: 'UTC' }) %><br>
+                  <span style="color:var(--color-ink-soft);font-family:var(--font-mono);font-size:0.78rem;"><%= b.booking_time.slice(0,5) %></span>
+                </td>
+                <td><%= lang === 'en' ? b.name_en : b.name_pt %></td>
+                <td>
+                  <%= b.user_name %><br>
+                  <span style="color:var(--color-ink-soft);font-size:0.8rem;"><%= b.user_email %><% if (b.user_phone) { %> · <%= b.user_phone %><% } %></span>
+                </td>
+                <td><span class="status-badge status-<%= b.status %>"><%= t['status_' + b.status] %></span></td>
+                <td>
+                  <div class="admin-actions">
+                    <% if (b.status === 'pending') { %>
+                      <form action="/gestao/marcacoes/<%= b.id %>/status" method="POST">
+                        <input type="hidden" name="status" value="confirmed">
+                        <button type="submit" class="btn btn-primary btn-sm"><%= t.admin_accept %></button>
+                      </form>
+                      <form action="/gestao/marcacoes/<%= b.id %>/status" method="POST">
+                        <input type="hidden" name="status" value="declined">
+                        <button type="submit" class="btn btn-outline btn-sm"><%= t.admin_decline %></button>
+                      </form>
+                    <% } else if (b.status === 'confirmed') { %>
+                      <form action="/gestao/marcacoes/<%= b.id %>/status" method="POST">
+                        <input type="hidden" name="status" value="completed">
+                        <button type="submit" class="btn btn-outline btn-sm"><%= t.admin_complete %></button>
+                      </form>
+                    <% } %>
+                  </div>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

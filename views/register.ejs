@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/nav') %>
+
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <span class="eyebrow">Katia Arnaut Estética</span>
+      <h2><%= t.register_title %></h2>
+      <p class="auth-sub"><%= lang === 'en' ? 'Create your account to book treatments.' : 'Crie a sua conta para marcar tratamentos.' %></p>
+
+      <% if (error) { %>
+        <div class="form-error"><%= error %></div>
+      <% } %>
+
+      <form method="POST" action="/register">
+        <div class="field">
+          <label for="name"><%= t.register_name %></label>
+          <input type="text" id="name" name="name" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email"><%= t.register_email %></label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="phone"><%= t.register_phone %></label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="password"><%= t.register_password %></label>
+          <input type="password" id="password" name="password" required minlength="6" autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block"><%= t.register_submit %></button>
+      </form>
+
+      <div class="auth-switch">
+        <%= t.register_has_account %> <a href="/login"><%= t.register_login_link %></a>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+  <script src="/js/main.js"></script>
+</body>
+</html>

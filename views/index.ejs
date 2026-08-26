@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/nav') %>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow"><%= t.hero_eyebrow %></span>
+        <h1 class="hero-title"><%= t.hero_title_line1 %><br><em><%= t.hero_title_line2 %></em></h1>
+        <p class="hero-subtitle"><%= t.hero_subtitle %></p>
+        <div class="hero-actions">
+          <a href="/marcar" class="btn btn-primary"><%= t.hero_cta_primary %></a>
+          <a href="#tratamentos" class="btn btn-outline"><%= t.hero_cta_secondary %></a>
+        </div>
+        <div class="hero-note"><%= t.hero_note %></div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Facial contour annotation map: signature visual -->
+          <path d="M200 60 C130 60 95 130 95 210 C95 270 110 320 140 360 C160 386 180 400 200 410 C220 400 240 386 260 360 C290 320 305 270 305 210 C305 130 270 60 200 60 Z"
+                stroke="#5C6E5E" stroke-width="1.2" fill="none" opacity="0.55"/>
+          <path d="M95 210 C60 205 45 235 55 260" stroke="#5C6E5E" stroke-width="1" fill="none" opacity="0.4"/>
+          <path d="M305 210 C340 205 355 235 345 260" stroke="#5C6E5E" stroke-width="1" fill="none" opacity="0.4"/>
+
+          <!-- measurement lines -->
+          <line x1="200" y1="60" x2="200" y2="410" stroke="#B98072" stroke-width="0.8" stroke-dasharray="2 5" opacity="0.5"/>
+          <line x1="60" y1="235" x2="340" y2="235" stroke="#B98072" stroke-width="0.8" stroke-dasharray="2 5" opacity="0.5"/>
+
+          <!-- annotation dots -->
+          <circle cx="160" cy="190" r="3" fill="#7E9180"/>
+          <circle cx="240" cy="190" r="3" fill="#7E9180"/>
+          <circle cx="200" cy="235" r="3" fill="#B98072"/>
+          <circle cx="200" cy="280" r="3" fill="#7E9180"/>
+          <circle cx="165" cy="310" r="3" fill="#7E9180"/>
+          <circle cx="235" cy="310" r="3" fill="#7E9180"/>
+          <circle cx="200" cy="150" r="3" fill="#B98072"/>
+
+          <!-- connecting annotation lines -->
+          <path class="dot-draw" d="M160 190 L110 165" stroke="#C4BEAE" stroke-width="0.8" fill="none"/>
+          <path class="dot-draw" d="M240 190 L295 165" stroke="#C4BEAE" stroke-width="0.8" fill="none"/>
+          <path class="dot-draw" d="M200 150 L200 95" stroke="#C4BEAE" stroke-width="0.8" fill="none"/>
+          <path class="dot-draw" d="M165 310 L100 335" stroke="#C4BEAE" stroke-width="0.8" fill="none"/>
+          <path class="dot-draw" d="M235 310 L300 335" stroke="#C4BEAE" stroke-width="0.8" fill="none"/>
+
+          <!-- labels -->
+          <text x="60" y="160" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B564C" letter-spacing="0.5">ZONA-T</text>
+          <text x="230" y="160" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B564C" letter-spacing="0.5">HIDRAT.</text>
+          <text x="150" y="90" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B564C" letter-spacing="0.5">01</text>
+          <text x="35" y="345" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B564C" letter-spacing="0.5">TEXTURA</text>
+          <text x="255" y="345" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B564C" letter-spacing="0.5">TONO</text>
+        </svg>
+        <span class="hero-visual-caption"><%= lang === 'en' ? 'Facial assessment map — every treatment starts here' : 'Mapa de avaliação facial — todo o tratamento começa aqui' %></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="tratamentos">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow"><%= t.services_eyebrow %></span>
+        <h2><%= t.services_title %></h2>
+        <p class="section-subtitle"><%= t.services_subtitle %></p>
+      </div>
+
+      <div class="services-grid">
+        <% services.forEach(function(s, i) { %>
+          <div class="service-card">
+            <span class="service-index"><%= String(i + 1).padStart(2, '0') %></span>
+            <h3><%= lang === 'en' ? s.name_en : s.name_pt %></h3>
+            <p><%= lang === 'en' ? s.description_en : s.description_pt %></p>
+            <div class="service-meta">
+              <span class="service-price"><% if (s.price) { %><small><%= t.service_from %></small> €<%= parseFloat(s.price).toFixed(0) %><% } %></span>
+              <span class="service-duration"><%= s.duration_minutes %> <%= t.service_duration %></span>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about-section" id="sobre">
+    <div class="container about-grid">
+      <div class="about-visual">
+        <div class="placeholder-fill">
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>
+          </svg>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow"><%= t.about_eyebrow %></span>
+        <h2><%= t.about_title %></h2>
+        <p style="margin-top:1rem;"><%= t.about_p1 %></p>
+        <p style="margin-top:0.8rem;"><%= t.about_p2 %></p>
+
+        <div class="about-stats">
+          <div>
+            <div class="about-stat-num"><%= t.about_stat1_num %></div>
+            <div class="about-stat-label"><%= t.about_stat1_label %></div>
+          </div>
+          <div>
+            <div class="about-stat-num"><%= t.about_stat2_num %></div>
+            <div class="about-stat-label"><%= t.about_stat2_label %></div>
+          </div>
+          <div>
+            <div class="about-stat-num"><%= t.about_stat3_num %></div>
+            <div class="about-stat-label"><%= t.about_stat3_label %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section" id="equipa">
+    <div class="container">
+      <div class="section-head center" style="margin-left:auto;margin-right:auto;">
+        <span class="eyebrow"><%= t.team_eyebrow %></span>
+        <h2><%= t.team_title %></h2>
+        <p class="section-subtitle"><%= t.team_subtitle %></p>
+      </div>
+
+      <div class="team-grid">
+        <% team.forEach(function(member) { %>
+          <div class="team-card">
+            <div class="team-photo">
+              <% if (member.photo_url) { %>
+                <img src="<%= member.photo_url %>" alt="<%= member.name %>">
+              <% } else { %>
+                <div class="placeholder-fill">
+                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>
+                  </svg>
+                </div>
+              <% } %>
+            </div>
+            <h3><%= member.name %></h3>
+            <div class="team-role"><%= lang === 'en' ? member.role_en : member.role_pt %></div>
+            <p class="team-bio"><%= lang === 'en' ? member.bio_en : member.bio_pt %></p>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section" id="galeria" style="background:var(--color-bg-alt);">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow"><%= t.gallery_eyebrow %></span>
+        <h2><%= t.gallery_title %></h2>
+      </div>
+      <div class="gallery-grid">
+        <% for (let i = 0; i < 8; i++) { %>
+          <div class="gallery-item <%= i === 0 || i === 5 ? 'tall' : '' %>">
+            <div class="placeholder-fill">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/>
+              </svg>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact-section" id="contactos">
+    <div class="container">
+      <span class="eyebrow"><%= t.contact_eyebrow %></span>
+      <h2><%= t.contact_title %></h2>
+      <p class="section-subtitle" style="margin-top:1rem;"><%= t.contact_subtitle %></p>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-card-label"><%= t.contact_instagram %></div>
+          <a href="https://www.instagram.com/katiaarnaut_esteticalisboa/" target="_blank" rel="noopener" class="contact-card-value">@katiaarnaut_esteticalisboa</a>
+          <div style="margin-top:1.5rem;">
+            <div class="contact-card-label"><%= t.contact_location %></div>
+            <div class="contact-card-value" style="font-size:1.2rem;"><%= t.contact_location_value %></div>
+          </div>
+          <a href="https://www.instagram.com/katiaarnaut_esteticalisboa/" target="_blank" rel="noopener" class="btn btn-clay" style="margin-top:1.5rem;">
+            <%= t.hero_cta_primary %>
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-label"><%= t.contact_hours %></div>
+          <table class="hours-table">
+            <% const dayKeys = ['day_0','day_1','day_2','day_3','day_4','day_5','day_6'];
+               const today = new Date().getDay();
+               hours.forEach(function(h) { %>
+              <tr class="<%= h.day_of_week === today ? 'today' : '' %> <%= h.is_closed ? 'closed' : '' %>">
+                <td><%= t[dayKeys[h.day_of_week]] %></td>
+                <td><%= h.is_closed ? t.admin_closed : (h.open_time.slice(0,5) + ' – ' + h.close_time.slice(0,5)) %></td>
+              </tr>
+            <% }); %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>
+  <%- include('partials/chatbot') %>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">Katia Arnaut <small>Estética</small></a>
+
+    <div class="nav-links">
+      <a href="/#tratamentos" class="<%= currentPath === '/' ? 'current' : '' %>"><%= t.nav_services %></a>
+      <a href="/#sobre"><%= t.nav_about %></a>
+      <a href="/#equipa"><%= t.nav_team %></a>
+      <a href="/#contactos"><%= t.nav_contact %></a>
+    </div>
+
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <form action="/lang/pt" method="POST"><button type="submit" class="<%= lang === 'pt' ? 'active' : '' %>">PT</button></form>
+        <form action="/lang/en" method="POST"><button type="submit" class="<%= lang === 'en' ? 'active' : '' %>">EN</button></form>
+      </div>
+
+      <% if (session.userId) { %>
+        <div class="nav-user-menu">
+          <button class="nav-user-btn"><%= session.userName ? session.userName.split(' ')[0] : 'Conta' %> ▾</button>
+          <div class="nav-dropdown">
+            <a href="/marcar"><%= t.nav_book %></a>
+            <a href="/as-minhas-marcacoes"><%= t.nav_my_bookings %></a>
+            <% if (session.isAdmin) { %>
+              <a href="/gestao/marcacoes"><%= t.nav_admin %></a>
+            <% } %>
+            <form action="/logout" method="POST"><button type="submit"><%= t.nav_logout %></button></form>
+          </div>
+        </div>
+      <% } else { %>
+        <a href="/login" class="btn btn-outline btn-sm"><%= t.nav_login %></a>
+        <a href="/marcar" class="btn btn-primary btn-sm"><%= t.nav_book %></a>
+      <% } %>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-head">
+    <span class="brand">Katia Arnaut</span>
+    <button class="mobile-toggle" id="mobileClose" aria-label="Fechar">✕</button>
+  </div>
+  <a href="/#tratamentos"><%= t.nav_services %></a>
+  <a href="/#sobre"><%= t.nav_about %></a>
+  <a href="/#equipa"><%= t.nav_team %></a>
+  <a href="/#contactos"><%= t.nav_contact %></a>
+  <% if (session.userId) { %>
+    <a href="/marcar"><%= t.nav_book %></a>
+    <a href="/as-minhas-marcacoes"><%= t.nav_my_bookings %></a>
+    <% if (session.isAdmin) { %><a href="/gestao/marcacoes"><%= t.nav_admin %></a><% } %>
+  <% } else { %>
+    <a href="/login"><%= t.nav_login %></a>
+    <a href="/register"><%= t.nav_register %></a>
+  <% } %>
+  <div class="mobile-menu-foot">
+    <div class="lang-toggle">
+      <form action="/lang/pt" method="POST"><button type="submit" class="<%= lang === 'pt' ? 'active' : '' %>">PT</button></form>
+      <form action="/lang/en" method="POST"><button type="submit" class="<%= lang === 'en' ? 'active' : '' %>">EN</button></form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/nav') %>
+
+  <div class="admin-layout">
+    <%- include('../partials/admin-sidebar') %>
+
+    <div class="admin-content">
+      <h2><%= t.admin_services %></h2>
+
+      <% services.forEach(function(s) { %>
+        <div class="admin-card">
+          <form action="/gestao/tratamentos/<%= s.id %>" method="POST">
+            <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="field">
+                <label>Nome (PT)</label>
+                <input type="text" name="name_pt" value="<%= s.name_pt %>" required>
+              </div>
+              <div class="field">
+                <label>Name (EN)</label>
+                <input type="text" name="name_en" value="<%= s.name_en %>" required>
+              </div>
+            </div>
+            <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="field">
+                <label>Descrição (PT)</label>
+                <textarea name="description_pt"><%= s.description_pt %></textarea>
+              </div>
+              <div class="field">
+                <label>Description (EN)</label>
+                <textarea name="description_en"><%= s.description_en %></textarea>
+              </div>
+            </div>
+            <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
+              <div class="field">
+                <label>Duração (min)</label>
+                <input type="number" name="duration_minutes" value="<%= s.duration_minutes %>" min="5" step="5">
+              </div>
+              <div class="field">
+                <label>Preço (€)</label>
+                <input type="number" name="price" value="<%= s.price %>" min="0" step="1">
+              </div>
+              <div class="field">
+                <label>&nbsp;</label>
+                <div class="toggle-row">
+                  <input type="checkbox" name="active" id="active-<%= s.id %>" <%= s.active ? 'checked' : '' %>>
+                  <label for="active-<%= s.id %>" style="text-transform:none;font-family:var(--font-body);font-size:0.9rem;"><%= t.admin_active %></label>
+                </div>
+              </div>
+            </div>
+            <div class="admin-actions" style="margin-top:0.8rem;">
+              <button type="submit" class="btn btn-primary btn-sm"><%= t.admin_save %></button>
+            </div>
+          </form>
+          <form action="/gestao/tratamentos/<%= s.id %>/eliminar" method="POST" onsubmit="return confirm('Eliminar este tratamento?');" style="margin-top:0.5rem;">
+            <button type="submit" class="btn btn-outline btn-sm"><%= t.admin_delete %></button>
+          </form>
+        </div>
+      <% }); %>
+
+      <div class="admin-card">
+        <h3 style="margin-bottom:1rem;"><%= t.admin_add_service %></h3>
+        <form action="/gestao/tratamentos" method="POST">
+          <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="field">
+              <label>Nome (PT)</label>
+              <input type="text" name="name_pt" required>
+            </div>
+            <div class="field">
+              <label>Name (EN)</label>
+              <input type="text" name="name_en" required>
+            </div>
+          </div>
+          <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="field">
+              <label>Descrição (PT)</label>
+              <textarea name="description_pt"></textarea>
+            </div>
+            <div class="field">
+              <label>Description (EN)</label>
+              <textarea name="description_en"></textarea>
+            </div>
+          </div>
+          <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="field">
+              <label>Duração (min)</label>
+              <input type="number" name="duration_minutes" value="60" min="5" step="5">
+            </div>
+            <div class="field">
+              <label>Preço (€)</label>
+              <input type="number" name="price" min="0" step="1">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm"><%= t.admin_add_service %></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
