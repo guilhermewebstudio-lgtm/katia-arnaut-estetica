@@ -45,7 +45,11 @@ document.addEventListener('DOMContentLoaded', function () {
         preloader.classList.add('done');
         preloader.style.display = 'none';
         document.body.classList.remove('preloading');
-        revealHero();
+        var heroEls = document.querySelectorAll('[data-hero-in]');
+        heroEls.forEach(function (el) {
+          el.style.opacity = 1;
+          el.style.transform = 'none';
+        });
       }, 300);
       return;
     }
@@ -78,20 +82,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Only run full preloader on first load of homepage in this tab session
+  // Preloader plays on every homepage load (and always on logo click)
   var isHome = document.body.dataset.page === 'home';
   if (isHome && preloader) {
-    var seen = sessionStorage.getItem('kae_intro_seen');
-    if (seen) {
-      preloader.style.display = 'none';
-      document.body.classList.remove('preloading');
-      if (typeof gsap !== 'undefined' && !reduceMotion) {
-        gsap.set(document.querySelectorAll('[data-hero-in]'), { opacity: 1, y: 0 });
-      }
-    } else {
-      runPreloader();
-      sessionStorage.setItem('kae_intro_seen', '1');
-    }
+    runPreloader();
   } else if (preloader) {
     preloader.style.display = 'none';
   }
