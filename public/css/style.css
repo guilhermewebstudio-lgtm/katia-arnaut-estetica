@@ -5,27 +5,27 @@
    Signature: facial contour annotation map (clinical precision meets skincare)
 ============================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  /* Colors */
-  --color-bg: #F4F2ED;
-  --color-bg-alt: #EDEAE2;
-  --color-card: #FCFBF8;
-  --color-ink: #212B22;
-  --color-ink-soft: #4B564C;
-  --color-sage: #7E9180;
-  --color-sage-deep: #5C6E5E;
-  --color-clay: #B98072;
-  --color-clay-soft: #D9BBAF;
-  --color-line: #DAD5C9;
-  --color-line-strong: #C4BEAE;
+  /* Colors — deep emerald & champagne gold, ivory canvas */
+  --color-bg: #F8F5EE;
+  --color-bg-alt: #F0EAD9;
+  --color-card: #FFFFFF;
+  --color-ink: #14201A;
+  --color-ink-soft: #4E5A52;
+  --color-sage: #3F5F4C;
+  --color-sage-deep: #24402F;
+  --color-clay: #B6924F;
+  --color-clay-soft: #E3CFA0;
+  --color-line: #E1D8C3;
+  --color-line-strong: #CBBB98;
   --color-white: #FFFFFF;
-  --color-error: #A85C4A;
+  --color-error: #A3492F;
 
   /* Type */
-  --font-display: 'Newsreader', Georgia, serif;
-  --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
 
   /* Spacing */
@@ -102,13 +102,13 @@ button { font-family: inherit; cursor: pointer; }
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 500;
-  line-height: 1.08;
+  line-height: 1.05;
   color: var(--color-ink);
   letter-spacing: -0.01em;
 }
 
-h2 { font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 400; }
-h3 { font-size: 1.4rem; font-weight: 500; }
+h2 { font-size: clamp(2.3rem, 4.6vw, 3.4rem); font-weight: 500; }
+h3 { font-size: 1.55rem; font-weight: 500; }
 
 p { color: var(--color-ink-soft); }
 
@@ -326,29 +326,7 @@ p { color: var(--color-ink-soft); }
 }
 .mobile-menu-foot { margin-top: auto; padding-top: var(--space-4); }
 
-/* ============ HERO ============ */
-.hero {
-  position: relative;
-  padding: var(--space-6) 0 var(--space-5);
-  overflow: hidden;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: var(--space-5);
-  align-items: center;
-}
-
-.hero-title {
-  font-size: clamp(2.6rem, 5.6vw, 4.6rem);
-  font-weight: 400;
-}
-.hero-title em {
-  font-style: italic;
-  color: var(--color-sage-deep);
-}
-
+/* ============ HERO shared bits (used by hero-cinematic) ============ */
 .hero-subtitle {
   margin-top: var(--space-3);
   font-size: 1.15rem;
@@ -373,24 +351,6 @@ p { color: var(--color-ink-soft); }
   gap: 0.5em;
 }
 .hero-note::before { content: '●'; font-size: 0.5em; }
-
-.hero-visual {
-  position: relative;
-  aspect-ratio: 4/5;
-}
-
-.hero-visual svg { width: 100%; height: 100%; }
-
-.hero-visual-caption {
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  color: var(--color-ink-soft);
-  text-transform: uppercase;
-}
 
 /* ============ SERVICES ============ */
 .services-grid {
@@ -1130,24 +1090,123 @@ body.preloading {
 }
 .nav-links a:hover { background-size: 100% 1px; }
 
-/* ============ HERO cinematic background ============ */
-.hero { position: relative; }
-.hero-bg-canvas {
+/* ============ HERO — cinematic full-bleed ============ */
+.hero-cinematic {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: var(--color-bg);
+}
+.hero-bg-image {
+  position: absolute;
+  inset: -20px;
+  z-index: 0;
+}
+.hero-bg-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: kenBurns 22s ease-in-out infinite alternate;
+}
+@keyframes kenBurns {
+  from { transform: scale(1.06) translate(0, 0); }
+  to { transform: scale(1.16) translate(-1.5%, -1%); }
+}
+.hero-scrim {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  opacity: 0.55;
-  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(20,32,26,0.35) 0%, rgba(20,32,26,0.25) 40%, rgba(20,32,26,0.88) 100%),
+    linear-gradient(90deg, rgba(20,32,26,0.55) 0%, rgba(20,32,26,0.05) 55%);
 }
-.hero-grid { position: relative; z-index: 1; }
+.hero-cinematic .container {
+  position: relative;
+  z-index: 2;
+  padding-bottom: var(--space-6);
+  padding-top: calc(var(--space-6) + 60px);
+  width: 100%;
+}
+.hero-cinematic .eyebrow { color: var(--color-clay-soft); }
+.hero-cinematic .eyebrow::before { background: var(--color-clay-soft); }
+.hero-title-cinematic {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6.4rem);
+  font-weight: 500;
+  line-height: 0.98;
+  color: var(--color-bg);
+  max-width: 16ch;
+}
+.hero-title-cinematic em { font-style: italic; color: var(--color-clay-soft); font-weight: 400; }
+.hero-cinematic .hero-subtitle { color: #DCE2DA; max-width: 42ch; font-size: 1.15rem; }
+.hero-cinematic .hero-note { color: var(--color-clay-soft); }
+.hero-cinematic .hero-note::before { color: var(--color-clay-soft); }
 
-.hero-visual svg circle,
-.hero-visual svg path { transform-box: fill-box; }
+.hero-scroll-cue {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-bg);
+  opacity: 0.75;
+}
+.hero-scroll-cue span {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(180deg, var(--color-clay-soft), transparent);
+  animation: scrollCue 2s ease-in-out infinite;
+}
+@keyframes scrollCue {
+  0% { transform: scaleY(0.3); transform-origin: top; opacity: 0.3; }
+  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  100% { transform: scaleY(0.3); transform-origin: bottom; opacity: 0.3; }
+}
 
-/* floating idle animation for annotation dots */
-@keyframes floatDot {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+/* floating badge card over hero image */
+.hero-badge {
+  position: absolute;
+  z-index: 2;
+  top: 130px;
+  right: var(--space-3);
+  background: rgba(248, 245, 238, 0.92);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.3rem;
+  max-width: 220px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
+.hero-badge-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sage-deep);
+  margin-bottom: 0.4em;
+}
+.hero-badge-value {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--color-ink);
+}
+
+@media (max-width: 900px) {
+  .hero-cinematic { min-height: 92vh; align-items: flex-end; }
+  .hero-badge { display: none; }
+  .hero-title-cinematic { max-width: none; }
 }
 
 /* ============ BOOKING WIZARD ============ */

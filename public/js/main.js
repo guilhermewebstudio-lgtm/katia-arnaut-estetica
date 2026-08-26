@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function revealHero() {
     if (typeof gsap === 'undefined' || reduceMotion) return;
-    var heroEls = document.querySelectorAll('.hero [data-hero-in]');
+    var heroEls = document.querySelectorAll('[data-hero-in]');
     gsap.to(heroEls, {
       opacity: 1,
       y: 0,
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
       preloader.style.display = 'none';
       document.body.classList.remove('preloading');
       if (typeof gsap !== 'undefined' && !reduceMotion) {
-        gsap.set(document.querySelectorAll('.hero [data-hero-in]'), { opacity: 1, y: 0 });
+        gsap.set(document.querySelectorAll('[data-hero-in]'), { opacity: 1, y: 0 });
       }
     } else {
       runPreloader();
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var label = preloader.querySelector('.preloader-label');
       gsap.set(ring, { strokeDashoffset: 402 });
       gsap.set(label, { opacity: 0 });
-      gsap.set(document.querySelectorAll('.hero [data-hero-in]'), { opacity: 0, y: 24 });
+      gsap.set(document.querySelectorAll('[data-hero-in]'), { opacity: 0, y: 24 });
       runPreloader();
     });
   }

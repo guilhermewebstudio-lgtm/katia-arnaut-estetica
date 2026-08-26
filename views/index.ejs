@@ -18,58 +18,32 @@
 
   <%- include('partials/nav') %>
 
-  <!-- HERO -->
-  <section class="hero">
-    <canvas class="hero-bg-canvas" id="heroCanvas" aria-hidden="true"></canvas>
-    <div class="container hero-grid">
-      <div>
-        <span class="eyebrow" data-hero-in style="opacity:0;transform:translateY(20px);"><%= t.hero_eyebrow %></span>
-        <h1 class="hero-title" data-hero-in style="opacity:0;transform:translateY(20px);"><%= t.hero_title_line1 %><br><em><%= t.hero_title_line2 %></em></h1>
-        <p class="hero-subtitle" data-hero-in style="opacity:0;transform:translateY(20px);"><%= t.hero_subtitle %></p>
-        <div class="hero-actions" data-hero-in style="opacity:0;transform:translateY(20px);">
-          <a href="/marcar" class="btn btn-primary"><%= t.hero_cta_primary %></a>
-          <a href="#tratamentos" class="btn btn-outline"><%= t.hero_cta_secondary %></a>
-        </div>
-        <div class="hero-note" data-hero-in style="opacity:0;transform:translateY(20px);"><%= t.hero_note %></div>
+  <!-- HERO — cinematic full-bleed -->
+  <section class="hero-cinematic">
+    <div class="hero-bg-image">
+      <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1920&q=80" alt="Katia Arnaut Estética">
+    </div>
+    <div class="hero-scrim"></div>
+
+    <div class="hero-badge" data-hero-in style="opacity:0;transform:translateY(20px);">
+      <div class="hero-badge-label"><%= lang === 'en' ? 'Since' : 'Desde' %></div>
+      <div class="hero-badge-value">2016</div>
+    </div>
+
+    <div class="container">
+      <span class="eyebrow" data-hero-in style="opacity:0;transform:translateY(20px);"><%= t.hero_eyebrow %></span>
+      <h1 class="hero-title-cinematic" data-hero-in style="opacity:0;transform:translateY(20px);"><%= t.hero_title_line1 %> <em><%= t.hero_title_line2 %></em></h1>
+      <p class="hero-subtitle" data-hero-in style="opacity:0;transform:translateY(20px);margin-top:1.3rem;"><%= t.hero_subtitle %></p>
+      <div class="hero-actions" data-hero-in style="opacity:0;transform:translateY(20px);">
+        <a href="/marcar" class="btn btn-primary"><%= t.hero_cta_primary %></a>
+        <a href="#tratamentos" class="btn btn-outline" style="border-color:rgba(248,245,238,0.4);color:var(--color-bg);"><%= t.hero_cta_secondary %></a>
       </div>
+      <div class="hero-note" data-hero-in style="opacity:0;transform:translateY(20px);"><%= t.hero_note %></div>
+    </div>
 
-      <div class="hero-visual" data-hero-in data-parallax style="opacity:0;transform:translateY(20px);" aria-hidden="true">
-        <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Facial contour annotation map: signature visual -->
-          <path d="M200 60 C130 60 95 130 95 210 C95 270 110 320 140 360 C160 386 180 400 200 410 C220 400 240 386 260 360 C290 320 305 270 305 210 C305 130 270 60 200 60 Z"
-                stroke="#5C6E5E" stroke-width="1.2" fill="none" opacity="0.55"/>
-          <path d="M95 210 C60 205 45 235 55 260" stroke="#5C6E5E" stroke-width="1" fill="none" opacity="0.4"/>
-          <path d="M305 210 C340 205 355 235 345 260" stroke="#5C6E5E" stroke-width="1" fill="none" opacity="0.4"/>
-
-          <!-- measurement lines -->
-          <line x1="200" y1="60" x2="200" y2="410" stroke="#B98072" stroke-width="0.8" stroke-dasharray="2 5" opacity="0.5"/>
-          <line x1="60" y1="235" x2="340" y2="235" stroke="#B98072" stroke-width="0.8" stroke-dasharray="2 5" opacity="0.5"/>
-
-          <!-- annotation dots -->
-          <circle cx="160" cy="190" r="3" fill="#7E9180"/>
-          <circle cx="240" cy="190" r="3" fill="#7E9180"/>
-          <circle cx="200" cy="235" r="3" fill="#B98072"/>
-          <circle cx="200" cy="280" r="3" fill="#7E9180"/>
-          <circle cx="165" cy="310" r="3" fill="#7E9180"/>
-          <circle cx="235" cy="310" r="3" fill="#7E9180"/>
-          <circle cx="200" cy="150" r="3" fill="#B98072"/>
-
-          <!-- connecting annotation lines -->
-          <path class="dot-draw" d="M160 190 L110 165" stroke="#C4BEAE" stroke-width="0.8" fill="none"/>
-          <path class="dot-draw" d="M240 190 L295 165" stroke="#C4BEAE" stroke-width="0.8" fill="none"/>
-          <path class="dot-draw" d="M200 150 L200 95" stroke="#C4BEAE" stroke-width="0.8" fill="none"/>
-          <path class="dot-draw" d="M165 310 L100 335" stroke="#C4BEAE" stroke-width="0.8" fill="none"/>
-          <path class="dot-draw" d="M235 310 L300 335" stroke="#C4BEAE" stroke-width="0.8" fill="none"/>
-
-          <!-- labels -->
-          <text x="60" y="160" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B564C" letter-spacing="0.5">ZONA-T</text>
-          <text x="230" y="160" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B564C" letter-spacing="0.5">HIDRAT.</text>
-          <text x="150" y="90" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B564C" letter-spacing="0.5">01</text>
-          <text x="35" y="345" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B564C" letter-spacing="0.5">TEXTURA</text>
-          <text x="255" y="345" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4B564C" letter-spacing="0.5">TONO</text>
-        </svg>
-        <span class="hero-visual-caption"><%= lang === 'en' ? 'Facial assessment map — every treatment starts here' : 'Mapa de avaliação facial — todo o tratamento começa aqui' %></span>
-      </div>
+    <div class="hero-scroll-cue" aria-hidden="true">
+      <span><%= lang === 'en' ? 'Scroll' : 'Descer' %></span>
+      <div class="hero-scroll-line"></div>
     </div>
   </section>
 
@@ -113,7 +87,7 @@
   <section class="section about-section" id="sobre">
     <div class="container about-grid">
       <div class="about-visual" data-reveal data-parallax>
-        <img src="https://picsum.photos/seed/kae-about/700/900" alt="Katia Arnaut Estética" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <img src="https://images.unsplash.com/photo-1643684391140-c5056cfd3436?auto=format&fit=crop&w=700&q=80" alt="Katia Arnaut Estética" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div data-reveal>
         <span class="eyebrow"><%= t.about_eyebrow %></span>
@@ -149,13 +123,18 @@
       </div>
 
       <div class="team-grid" data-reveal-group>
+        <% const teamPhotos = [
+          'https://images.unsplash.com/photo-1785852790570-0d2858068c70?auto=format&fit=crop&w=500&q=80',
+          'https://images.unsplash.com/photo-1559185590-879c66a55254?auto=format&fit=crop&w=500&q=80',
+          'https://images.unsplash.com/photo-1782159981439-b99dfb84f4b8?auto=format&fit=crop&w=500&q=80'
+        ]; %>
         <% team.forEach(function(member, mi) { %>
           <div class="team-card" data-reveal-item>
             <div class="team-photo">
               <% if (member.photo_url) { %>
                 <img src="<%= member.photo_url %>" alt="<%= member.name %>">
               <% } else { %>
-                <img src="https://picsum.photos/seed/kae-team-<%= mi %>/500/620" alt="<%= member.name %>" loading="lazy">
+                <img src="<%= teamPhotos[mi % teamPhotos.length] %>" alt="<%= member.name %>" loading="lazy">
               <% } %>
             </div>
             <h3><%= member.name %></h3>
@@ -175,9 +154,19 @@
         <h2><%= t.gallery_title %></h2>
       </div>
       <div class="gallery-grid" data-reveal-group>
+        <% const galleryPhotos = [
+          'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80',
+          'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=700&q=80',
+          'https://images.unsplash.com/photo-1731514771613-991a02407132?auto=format&fit=crop&w=700&q=80',
+          'https://images.unsplash.com/photo-1761718210089-ba3bb5ccb54f?auto=format&fit=crop&w=700&q=80',
+          'https://images.unsplash.com/photo-1761718209835-c8586b7dcac0?auto=format&fit=crop&w=700&q=80',
+          'https://images.unsplash.com/photo-1559185590-d545a0c5a1dc?auto=format&fit=crop&w=700&q=80',
+          'https://images.unsplash.com/photo-1761718209793-cb6d348831e0?auto=format&fit=crop&w=700&q=80',
+          'https://images.unsplash.com/photo-1559185590-fcf099ac62c5?auto=format&fit=crop&w=700&q=80'
+        ]; %>
         <% for (let i = 0; i < 8; i++) { %>
           <div class="gallery-item <%= i === 0 || i === 5 ? 'tall' : '' %>" data-reveal-item>
-            <img src="https://picsum.photos/seed/kae-gallery-<%= i %>/600/<%= (i === 0 || i === 5) ? 760 : 380 %>" alt="Katia Arnaut Estética" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+            <img src="<%= galleryPhotos[i] %>" alt="Katia Arnaut Estética" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
           </div>
         <% } %>
       </div>
@@ -201,7 +190,10 @@
             <div class="contact-card-label"><%= t.contact_location %></div>
             <div class="contact-card-value" style="font-size:1.2rem;"><%= t.contact_location_value %></div>
           </div>
-          <a href="https://www.instagram.com/katiaarnaut_esteticalisboa/" target="_blank" rel="noopener" class="btn btn-clay" style="margin-top:1.5rem;">
+          <a href="https://www.instagram.com/katiaarnaut_esteticalisboa/" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:1.5rem;border-color:rgba(248,245,238,0.3);color:var(--color-bg);">
+            <%= t.contact_instagram %>
+          </a>
+          <a href="/marcar" class="btn btn-clay" style="margin-top:0.8rem;">
             <%= t.hero_cta_primary %>
           </a>
         </div>
