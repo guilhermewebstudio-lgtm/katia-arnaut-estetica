@@ -212,16 +212,103 @@ const faqData = [
     keywords_en: ['late', 'running late', 'arrive later'],
     answer_pt: 'Se souber que vai chegar atrasada, avise-nos com antecedência pelo Instagram para ajustarmos o horário sempre que possível.',
     answer_en: 'If you know you\'ll be running late, please let us know in advance via Instagram so we can adjust the schedule whenever possible.'
+  },
+  {
+    id: 'since_when',
+    keywords_pt: ['desde quando', 'há quanto tempo existem', 'quando abriram', 'fundada em', 'fundado em'],
+    keywords_en: ['since when', 'how long have you', 'when did you open', 'founded in'],
+    answer_pt: 'A Katia Arnaut Estética está a cuidar de peles desde 2016, sempre em Benfica, Lisboa.',
+    answer_en: 'Katia Arnaut Estética has been caring for skin since 2016, always in Benfica, Lisbon.'
+  },
+  {
+    id: 'products',
+    keywords_pt: ['produtos', 'marcas', 'que produtos usam', 'produtos naturais', 'produtos orgânicos', 'cruelty free'],
+    keywords_en: ['products', 'brands', 'what products do you use', 'natural products', 'organic', 'cruelty free'],
+    answer_pt: 'Trabalhamos com produtos profissionais de estética facial, selecionados pela qualidade e segurança para a pele. Pode perguntar à equipa sobre marcas específicas pelo Instagram.',
+    answer_en: 'We work with professional facial aesthetics products, chosen for quality and skin safety. You can ask our team about specific brands via Instagram.'
+  },
+  {
+    id: 'body_treatments',
+    keywords_pt: ['tratamento corporal', 'corpo', 'massagem corporal', 'fazem corpo'],
+    keywords_en: ['body treatment', 'body massage', 'do you do body'],
+    answer_pt: 'Somos especializados em estética facial — neste momento não temos tratamentos corporais no nosso catálogo.',
+    answer_en: 'We specialize in facial aesthetics — at the moment we don\'t offer body treatments in our catalog.'
+  },
+  {
+    id: 'makeup_lashes',
+    keywords_pt: ['maquilhagem', 'sobrancelhas', 'pestanas', 'design de sobrancelhas', 'micropigmentação'],
+    keywords_en: ['makeup', 'eyebrows', 'lashes', 'eyebrow design', 'micropigmentation'],
+    answer_pt: 'O nosso foco é estética facial (limpeza, acne, peelings, etc.) — não fazemos maquilhagem, sobrancelhas ou pestanas neste momento.',
+    answer_en: 'Our focus is facial aesthetics (cleansing, acne, peels, etc.) — we don\'t currently do makeup, eyebrows or lashes.'
+  },
+  {
+    id: 'online_consult',
+    keywords_pt: ['consulta online', 'à distância', 'video chamada', 'videochamada'],
+    keywords_en: ['online consultation', 'remote consultation', 'video call'],
+    answer_pt: 'As nossas consultas são sempre presenciais no estúdio em Benfica, para uma avaliação mais precisa da sua pele.',
+    answer_en: 'Our consultations are always in person at the studio in Benfica, for a more accurate assessment of your skin.'
+  },
+  {
+    id: 'loyalty',
+    keywords_pt: ['fidelização', 'desconto', 'promoção', 'cartão de cliente', 'pacote de sessões'],
+    keywords_en: ['loyalty', 'discount', 'promotion', 'package deal', 'membership'],
+    answer_pt: 'Para saber sobre promoções ou pacotes de sessões atuais, a melhor forma é perguntar diretamente à equipa pelo Instagram.',
+    answer_en: 'To find out about current promotions or session packages, the best way is to ask our team directly via Instagram.'
+  },
+  {
+    id: 'forgot_password',
+    keywords_pt: ['esqueci a palavra-passe', 'recuperar palavra-passe', 'não consigo entrar', 'esqueci a senha'],
+    keywords_en: ['forgot password', 'reset password', 'can\'t log in', 'cannot log in'],
+    answer_pt: 'De momento não temos recuperação automática de palavra-passe no site — contacte-nos pelo Instagram e ajudamos a resolver.',
+    answer_en: 'We don\'t yet have automatic password recovery on the site — contact us via Instagram and we\'ll help sort it out.'
+  },
+  {
+    id: 'change_language',
+    keywords_pt: ['mudar idioma', 'mudar de idioma', 'mudar o idioma', 'como mudo o idioma', 'idioma do site', 'trocar idioma', 'trocar para inglês', 'site em inglês'],
+    keywords_en: ['change language', 'switch language', 'site in portuguese', 'switch to english'],
+    answer_pt: 'Pode alternar entre Português e Inglês a qualquer momento, clicando em "PT" ou "EN" no topo do site.',
+    answer_en: 'You can switch between Portuguese and English at any time by clicking "PT" or "EN" at the top of the site.'
+  },
+  {
+    id: 'what_site_does',
+    keywords_pt: ['o que é este site', 'para que serve o site', 'como funciona o site'],
+    keywords_en: ['what is this site', 'what does this site do', 'how does the site work'],
+    answer_pt: 'Este site permite-lhe conhecer os nossos tratamentos, ver a equipa e o espaço, marcar consultas online, acompanhar as suas marcações e enviar-nos sugestões — tudo numa conta pessoal gratuita.',
+    answer_en: 'This site lets you explore our treatments, meet the team and space, book appointments online, track your bookings and send us suggestions — all through a free personal account.'
+  },
+  {
+    id: 'human_contact',
+    keywords_pt: ['falar com uma pessoa', 'falar com a katia', 'atendimento humano', 'quero falar com alguém'],
+    keywords_en: ['talk to a person', 'speak to katia', 'human support', 'talk to someone'],
+    answer_pt: 'Claro! A forma mais direta de falar com a equipa é pelo Instagram @katiaarnaut_esteticalisboa.',
+    answer_en: 'Of course! The most direct way to talk to the team is via Instagram @katiaarnaut_esteticalisboa.'
   }
 ];
 
 function detectLanguage(message) {
-  const lower = message.toLowerCase();
-  const ptSignals = ['ó', 'ã', 'ç', 'á', 'é', 'í', 'ú', 'como', 'quanto', 'onde', 'você', 'olá', 'obrigad', 'não', 'está'];
-  const enSignals = ['the ', 'how ', 'what', 'where', 'hello', 'hi ', 'thanks', 'please', 'you ', 'is there'];
+  const lower = ' ' + message.toLowerCase() + ' ';
+  // Larger word banks with word-boundary-ish spacing for better accuracy
+  const ptSignals = [
+    ' o ', ' a ', ' os ', ' as ', ' um ', ' uma ', ' para ', ' com ', ' sem ', ' não ', ' sim ',
+    ' que ', ' qual ', ' quais ', ' quanto ', ' quanto custa', ' quando ', ' onde ', ' como ',
+    ' voces ', ' vocês ', ' está ', ' estão ', ' tem ', ' tenho ', ' preciso ', ' quero ', ' gostaria ',
+    ' obrigad', ' bom dia', ' boa tarde', ' boa noite', ' olá', ' ola ', ' por favor', ' pode ',
+    ' vai ', ' fazer ', ' fica ', ' é ', ' são ', ' das ', ' dos ', ' na ', ' no ', ' pelo ', ' pela ',
+    'ção', 'ções', 'ão ', 'inho', 'ç'
+  ];
+  const enSignals = [
+    ' the ', ' is ', ' are ', ' you ', ' your ', ' do ', ' does ', ' can ', ' i ', ' my ', ' what ',
+    ' where ', ' when ', ' how ', ' how much', ' how many', ' please', ' thanks', ' thank you',
+    ' hello', ' hi ', ' hey ', ' need ', ' want ', ' would ', ' book ', ' booking ', ' price ',
+    ' cost ', ' open ', ' close ', ' with ', ' for ', ' and ', ' or ', ' have ', ' has ', ' will ',
+    ' this ', ' that ', ' about ', ' treatment', ' appointment'
+  ];
   let ptScore = 0, enScore = 0;
   ptSignals.forEach(s => { if (lower.includes(s)) ptScore++; });
   enSignals.forEach(s => { if (lower.includes(s)) enScore++; });
+  // Strong accent/character signal — if present, it's almost certainly Portuguese
+  if (/[áàâãéêíóôõúçÁÀÂÃÉÊÍÓÔÕÚÇ]/.test(message)) ptScore += 3;
+  if (ptScore === 0 && enScore === 0) return null; // ambiguous — let caller decide fallback
   return enScore > ptScore ? 'en' : 'pt';
 }
 
@@ -251,11 +338,14 @@ function findBestMatch(message) {
 }
 
 router.post('/api/chatbot', async (req, res) => {
-  const { message, lang: preferredLang } = req.body;
+  const { message, lang: siteLang } = req.body;
   if (!message || typeof message !== 'string') {
     return res.status(400).json({ error: 'Mensagem inválida' });
   }
-  const detectedLang = preferredLang || detectLanguage(message);
+  // Priority: detect the language the person actually typed in.
+  // Only fall back to the site's PT/EN toggle when the message is too short/ambiguous to tell.
+  const detectedFromMessage = detectLanguage(message);
+  const detectedLang = detectedFromMessage || siteLang || 'pt';
   const match = findBestMatch(message);
 
   let reply;
