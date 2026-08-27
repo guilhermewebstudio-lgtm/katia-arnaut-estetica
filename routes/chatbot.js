@@ -146,7 +146,7 @@ const faqData = [
   {
     id: 'greeting',
     keywords_pt: ['ola', 'olá', 'boa tarde', 'bom dia', 'boa noite', 'oi'],
-    keywords_en: ['hello', 'hi ', 'good morning', 'good afternoon', 'good evening', 'hey'],
+    keywords_en: ['hello', ' hi ', 'good morning', 'good afternoon', 'good evening', 'hey'],
     answer_pt: 'Olá! É um prazer receber a sua mensagem. Posso ajudar com informações sobre tratamentos, marcações, preços ou horários — o que gostaria de saber?',
     answer_en: 'Hello! Great to hear from you. I can help with information about treatments, bookings, prices or hours — what would you like to know?'
   },
@@ -208,7 +208,7 @@ const faqData = [
   },
   {
     id: 'late',
-    keywords_pt: ['atraso', 'atrasar', 'vou chegar atrasada', 'chegar mais tarde'],
+    keywords_pt: ['atraso', 'atrasar', 'atrasada', 'atrasado', 'vou chegar atrasada', 'chegar mais tarde'],
     keywords_en: ['late', 'running late', 'arrive later'],
     answer_pt: 'Se souber que vai chegar atrasada, avise-nos com antecedência pelo Instagram para ajustarmos o horário sempre que possível.',
     answer_en: 'If you know you\'ll be running late, please let us know in advance via Instagram so we can adjust the schedule whenever possible.'
@@ -286,14 +286,15 @@ const faqData = [
 ];
 
 function detectLanguage(message) {
-  const lower = ' ' + message.toLowerCase() + ' ';
+  const lower = normalizeForMatch(message);
   // Larger word banks with word-boundary-ish spacing for better accuracy
   const ptSignals = [
     ' o ', ' a ', ' os ', ' as ', ' um ', ' uma ', ' para ', ' com ', ' sem ', ' não ', ' sim ',
     ' que ', ' qual ', ' quais ', ' quanto ', ' quanto custa', ' quando ', ' onde ', ' como ',
-    ' voces ', ' vocês ', ' está ', ' estão ', ' tem ', ' tenho ', ' preciso ', ' quero ', ' gostaria ',
+    ' voces ', ' vocês ', ' está ', ' estão ', ' estou ', ' tem ', ' tenho ', ' preciso ', ' quero ', ' gostaria ',
     ' obrigad', ' bom dia', ' boa tarde', ' boa noite', ' olá', ' ola ', ' por favor', ' pode ',
     ' vai ', ' fazer ', ' fica ', ' é ', ' são ', ' das ', ' dos ', ' na ', ' no ', ' pelo ', ' pela ',
+    ' isso ', ' aqui ', ' agora ', ' hoje ', ' amanhã ', ' amanha ', ' obrigado', ' minha ', ' meu ',
     'ção', 'ções', 'ão ', 'inho', 'ç'
   ];
   const enSignals = [
@@ -316,18 +317,31 @@ function stripAccents(str) {
   return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
+// Normalizes text for matching: strips accents, lowercases, and replaces punctuation
+// with spaces so "Hi!" / "obrigada!" / "preço?" match the same as their plain forms.
+function normalizeForMatch(str) {
+  return ' ' + stripAccents(str.toLowerCase()).replace(/[^\p{L}\p{N}]+/gu, ' ').trim() + ' ';
+}
+
 // Score-based matching: weights longer/more specific phrases higher than short generic words,
-// and is accent-insensitive so plurals/variants (marcação vs marcações) still match well.
+// is accent/punctuation-insensitive, and requires whole-word boundaries so short keywords
+// (e.g. "late") don't false-match inside unrelated words (e.g. "unrelated").
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function findBestMatch(message) {
-  const lower = stripAccents(message.toLowerCase());
+  const lower = normalizeForMatch(message).trim();
   let best = null;
   let bestScore = 0;
   for (const item of faqData) {
     const allKeywords = [...item.keywords_pt, ...item.keywords_en];
     let score = 0;
     allKeywords.forEach(k => {
-      const nk = stripAccents(k.toLowerCase());
-      if (lower.includes(nk)) score += nk.length;
+      const nk = normalizeForMatch(k).trim();
+      if (!nk) return;
+      const re = new RegExp('(^|\\s)' + escapeRegex(nk) + '(\\s|$)');
+      if (re.test(lower)) score += nk.length;
     });
     if (score > bestScore) {
       bestScore = score;
