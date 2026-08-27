@@ -3,46 +3,60 @@
 <head>
   <%- include('partials/head') %>
 </head>
-<body>
+<body data-page="register">
   <%- include('partials/nav') %>
 
-  <div class="auth-wrap">
-    <div class="auth-card">
-      <span class="eyebrow">Katia Arnaut Estética</span>
-      <h2><%= t.register_title %></h2>
-      <p class="auth-sub"><%= lang === 'en' ? 'Create your account to book treatments.' : 'Crie a sua conta para marcar tratamentos.' %></p>
+  <div class="auth-split">
+    <div class="auth-visual">
+      <img src="https://images.unsplash.com/photo-1782159981439-b99dfb84f4b8?auto=format&fit=crop&w=1200&q=80" alt="Katia Arnaut Estética">
+      <div class="auth-visual-scrim"></div>
+      <div class="auth-visual-content">
+        <svg class="auth-visual-mark" width="40" height="40" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+          <circle cx="28" cy="28" r="26" stroke="currentColor" stroke-width="1"/>
+          <text x="28" y="37" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="24" fill="currentColor">KA</text>
+        </svg>
+        <p class="auth-visual-quote">"<%= t.auth_visual_quote %>"</p>
+        <span class="auth-visual-tag">Katia Arnaut Estética · Benfica, Lisboa</span>
+      </div>
+    </div>
 
-      <% if (error) { %>
-        <div class="form-error"><%= error %></div>
-      <% } %>
+    <div class="auth-form-side">
+      <div class="auth-card" data-reveal>
+        <span class="eyebrow"><%= t.hero_eyebrow %></span>
+        <h2><%= t.auth_register_welcome %></h2>
+        <p class="auth-sub"><%= t.auth_register_subtitle %></p>
 
-      <form method="POST" action="/register">
-        <div class="field">
-          <label for="name"><%= t.register_name %></label>
-          <input type="text" id="name" name="name" required autocomplete="name">
-        </div>
-        <div class="field">
-          <label for="email"><%= t.register_email %></label>
-          <input type="email" id="email" name="email" required autocomplete="email">
-        </div>
-        <div class="field">
-          <label for="phone"><%= t.register_phone %></label>
-          <input type="tel" id="phone" name="phone" autocomplete="tel">
-        </div>
-        <div class="field">
-          <label for="password"><%= t.register_password %></label>
-          <input type="password" id="password" name="password" required minlength="6" autocomplete="new-password">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block"><%= t.register_submit %></button>
-      </form>
+        <% if (error) { %>
+          <div class="form-error"><%= error %></div>
+        <% } %>
 
-      <div class="auth-switch">
-        <%= t.register_has_account %> <a href="/login"><%= t.register_login_link %></a>
+        <form method="POST" action="/register">
+          <div class="field">
+            <label for="name"><%= t.register_name %></label>
+            <input type="text" id="name" name="name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email"><%= t.register_email %></label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="phone"><%= t.register_phone %></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="password"><%= t.register_password %></label>
+            <input type="password" id="password" name="password" required minlength="6" autocomplete="new-password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><%= t.register_submit %></button>
+        </form>
+
+        <div class="auth-switch">
+          <%= t.register_has_account %> <a href="/login"><%= t.register_login_link %></a>
+        </div>
       </div>
     </div>
   </div>
 
-  <%- include('partials/footer') %>
   <script src="/js/main.js"></script>
 </body>
 </html>

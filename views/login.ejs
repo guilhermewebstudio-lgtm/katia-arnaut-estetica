@@ -3,38 +3,52 @@
 <head>
   <%- include('partials/head') %>
 </head>
-<body>
+<body data-page="login">
   <%- include('partials/nav') %>
 
-  <div class="auth-wrap">
-    <div class="auth-card">
-      <span class="eyebrow">Katia Arnaut Estética</span>
-      <h2><%= t.login_title %></h2>
-      <p class="auth-sub"><%= lang === 'en' ? 'Log in to book your appointment.' : 'Entre para marcar a sua consulta.' %></p>
+  <div class="auth-split">
+    <div class="auth-visual">
+      <img src="https://images.unsplash.com/photo-1643684391140-c5056cfd3436?auto=format&fit=crop&w=1200&q=80" alt="Katia Arnaut Estética">
+      <div class="auth-visual-scrim"></div>
+      <div class="auth-visual-content">
+        <svg class="auth-visual-mark" width="40" height="40" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+          <circle cx="28" cy="28" r="26" stroke="currentColor" stroke-width="1"/>
+          <text x="28" y="37" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="24" fill="currentColor">KA</text>
+        </svg>
+        <p class="auth-visual-quote">"<%= t.auth_visual_quote %>"</p>
+        <span class="auth-visual-tag">Katia Arnaut Estética · Benfica, Lisboa</span>
+      </div>
+    </div>
 
-      <% if (error) { %>
-        <div class="form-error"><%= error %></div>
-      <% } %>
+    <div class="auth-form-side">
+      <div class="auth-card" data-reveal>
+        <span class="eyebrow"><%= t.hero_eyebrow %></span>
+        <h2><%= t.auth_login_welcome %></h2>
+        <p class="auth-sub"><%= t.auth_login_subtitle %></p>
 
-      <form method="POST" action="/login">
-        <div class="field">
-          <label for="email"><%= t.login_email %></label>
-          <input type="email" id="email" name="email" required autocomplete="email">
+        <% if (error) { %>
+          <div class="form-error"><%= error %></div>
+        <% } %>
+
+        <form method="POST" action="/login">
+          <div class="field">
+            <label for="email"><%= t.login_email %></label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="password"><%= t.login_password %></label>
+            <input type="password" id="password" name="password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><%= t.login_submit %></button>
+        </form>
+
+        <div class="auth-switch">
+          <%= t.login_no_account %> <a href="/register"><%= t.login_register_link %></a>
         </div>
-        <div class="field">
-          <label for="password"><%= t.login_password %></label>
-          <input type="password" id="password" name="password" required autocomplete="current-password">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block"><%= t.login_submit %></button>
-      </form>
-
-      <div class="auth-switch">
-        <%= t.login_no_account %> <a href="/register"><%= t.login_register_link %></a>
       </div>
     </div>
   </div>
 
-  <%- include('partials/footer') %>
   <script src="/js/main.js"></script>
 </body>
 </html>

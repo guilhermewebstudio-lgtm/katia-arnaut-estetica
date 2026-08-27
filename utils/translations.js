@@ -131,6 +131,12 @@ const pt = {
   register_error_exists: 'Já existe uma conta com este email.',
   register_error_generic: 'Não foi possível criar a conta. Tente novamente.',
 
+  auth_login_welcome: 'Bem-vinda de volta',
+  auth_login_subtitle: 'Entre para gerir as suas marcações e continuar a cuidar da sua pele connosco.',
+  auth_register_welcome: 'Junte-se ao estúdio',
+  auth_register_subtitle: 'Crie a sua conta em menos de um minuto e comece a marcar os seus tratamentos.',
+  auth_visual_quote: 'Cada visita é um momento só seu.',
+
   footer_rights: 'Todos os direitos reservados.',
   footer_made_by: 'Website por',
   footer_tagline: 'Estúdio de estética facial em Benfica, Lisboa — cuidado personalizado, do primeiro diagnóstico ao resultado final.',
@@ -307,6 +313,12 @@ const en = {
   register_login_link: 'Log in',
   register_error_exists: 'An account with this email already exists.',
   register_error_generic: 'Could not create account. Please try again.',
+
+  auth_login_welcome: 'Welcome back',
+  auth_login_subtitle: 'Log in to manage your bookings and keep taking care of your skin with us.',
+  auth_register_welcome: 'Join the studio',
+  auth_register_subtitle: 'Create your account in under a minute and start booking your treatments.',
+  auth_visual_quote: 'Every visit is a moment just for you.',
 
   footer_rights: 'All rights reserved.',
   footer_made_by: 'Website by',
