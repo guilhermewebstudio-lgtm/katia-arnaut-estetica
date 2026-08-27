@@ -1069,7 +1069,9 @@ p { color: var(--color-ink-soft); }
   padding: 0.6em;
   font-size: 0.85rem;
   font-family: var(--font-body);
+  color: var(--color-ink);
 }
+.chatbot-input-row input::placeholder { color: var(--color-ink-soft); }
 .chatbot-input-row input:focus { outline: none; }
 .chatbot-input-row button {
   background: var(--color-ink);
